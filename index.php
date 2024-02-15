@@ -35,5 +35,14 @@
     </div>
     
     <script src="./js/script.js"></script>
+    <script>
+        // Vérifie si un message d'erreur est présent dans la session
+        if ('<?php echo isset($_SESSION["error_message"]); ?>') {
+            // Affiche l'alerte
+            alert('<?php echo $_SESSION["error_message"]; ?>');
+            // Efface le message d'erreur de la session
+            <?php unset($_SESSION["error_message"]); ?>
+        }
+        </script>
 </body>
 </html>
