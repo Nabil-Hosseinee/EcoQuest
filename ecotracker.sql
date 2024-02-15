@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 15 fév. 2024 à 09:49
+-- Généré le : jeu. 15 fév. 2024 à 13:16
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -49,6 +49,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`Id_user`, `Identifiant`, `Mot de passe`, `Pseudo`, `Grade`) VALUES
+(1, 'dydy@gmail.com', 'caca', 'Dydy', 'Bandeur de pétrole');
+
+--
 -- Index pour les tables déchargées
 --
 
@@ -78,7 +85,7 @@ ALTER TABLE `défis`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
