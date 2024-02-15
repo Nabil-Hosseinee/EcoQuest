@@ -4,7 +4,6 @@ session_start();
 $identifiant = $_POST["id"];
 $_POST["id"] = filter_input(INPUT_POST,"id", FILTER_SANITIZE_SPECIAL_CHARS);
 $mdp = sha1($_POST["mdp"]);
-$message = "L'identifiant ou le Mot de passe est invalide.";
 
 include('connect_bdd.php');
 
@@ -15,9 +14,12 @@ $user = $userStatement->fetchAll();
 $found = false;
 
 foreach ($user as $users) {
-    if ($identifiant == $users['Identifiant'] && $mdp == $users['Mot de passe']) {
-        $found = true;
-        break;
+    if ($identifiant == $users['Identifiant'] || $identifiant == $users['Pseudo'] && $mdp == $users['Mot de passe']) {
+        header("Location: accueil.php");
+    }
+    else {
+        $message = "Identifiant ou mot de passe invalide.";
+        echo "<script>alert('$message'); window.location.href = 'index.html';</script>";
     }
 }
 
