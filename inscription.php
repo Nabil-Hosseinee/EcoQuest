@@ -9,16 +9,14 @@ if (isset($_POST['pseudo'], $_POST['mdp'], $_POST['id'])) {
     $sql = "INSERT INTO user (Identifiant, Pseudo, `Mot de passe`) VALUES (:id, :pseudo, :mdp)";
     $stmt = $db->prepare($sql);
 
-    // Liaison des valeurs des paramètres
     $stmt->bindParam(':id', $id);
     $stmt->bindParam(':pseudo', $pseudo);
     $stmt->bindParam(':mdp', $mdp);
 
-    // Exécution de la requête
     if ($stmt->execute()) {
         echo 'Inscription réussie!';
         header('Location: accueil.php');
-        exit(); // Assurer qu'aucun code supplémentaire n'est exécuté après la redirection
+        exit(); 
     } else {
         echo 'Erreur lors de l\'inscription.';
     }
