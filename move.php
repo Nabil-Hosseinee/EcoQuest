@@ -17,7 +17,7 @@ $userStatement ->execute();
 $user = $userStatement->fetchAll();
 
 foreach ($user as $users) {
-    if ($identifiant == $users['Identifiant'] && $mdp == $users['Mot de passe']) {
+    if ($identifiant == $users['Identifiant'] || $identifiant == $users['Pseudo'] && $mdp == $users['Mot de passe']) {
         header("Location: accueil.php");
     }
     else {
