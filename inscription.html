@@ -17,22 +17,22 @@
 
         <form method="post">
             <div class="first-line">
-                <input type="text" placeholder="Nom" name="nom">
-                <input type="text" placeholder="Prénom" name="prenom">
+                <input type="text" placeholder="Nom" name="nom" required autocomplete="off">
+                <input type="text" placeholder="Pseudo" name="pseudo" required autocomplete="off">
             </div>
 
             <div class="second-line">
-                <input type="email" placeholder="Adresse Mail" required name="mail">
+                <input id="mail" type="email" placeholder="Adresse Mail" required name="mail" required autocomplete="off">
             </div>
 
             <div class="third-line">
-                <input id="mdp" type="password" placeholder="Mot de passe" required name="mdp">
-                <input type="password" placeholder="Confirmez le mot de passe" required name="mdp-confirm">
+                <input id="mdp" type="password" placeholder="Mot de passe" required name="mdp" required>
+                <input type="password" placeholder="Confirmez le mot de passe" required name="mdp-confirm" required>
             </div>
 
             <div class="submit-container">
-                <input class="btn connect-btn" type="submit" value="Connexion">
                 <input class="btn register-btn" type="submit" value="Inscription">
+                <p>Vous avez un compte ? <a href="index.html">Se connecter</a></p>
             </div>
         </form>
     </div>
