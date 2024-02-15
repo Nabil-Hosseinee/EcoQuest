@@ -6,7 +6,6 @@ ini_set("display_errors", 1);
 $identifiant = $_POST["id"];
 $_POST["id"] = filter_input(INPUT_POST,"id", FILTER_SANITIZE_SPECIAL_CHARS);
 $mdp = sha1($_POST["mdp"]);
-$message = "L'identifiant ou le Mot de passe est invalide.";
 
 echo $identifiant;
 echo $mdp;
@@ -22,8 +21,8 @@ foreach ($user as $users) {
         header("Location: accueil.php");
     }
     else {
-        echo "<script>alert('$message');</script>";
-        header("Location: index.html");
+        $message = "Identifiant ou mot de passe invalide.";
+        echo "<script>alert('$message'); window.location.href = 'index.html';</script>";
     }
 }
 ?>
