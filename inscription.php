@@ -15,7 +15,7 @@ if (isset($_POST['pseudo'], $_POST['mdp'], $_POST['id'])) {
 
     if ($stmt->execute()) {
         echo 'Inscription réussie!';
-        header('Location: accueil.php');
+        header('Location: index.html');
         exit(); 
     } else {
         echo 'Erreur lors de l\'inscription.';
