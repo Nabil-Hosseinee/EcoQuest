@@ -1,21 +1,20 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.html");
+    exit();
+}
 
-// Créer un fichier temporaire
-$filename = tempnam('C:/xampp/tmp', "session_data_");
+include('connect_bdd.php');
 
-// Ouvrir le fichier temporaire en écriture
-$handle = fopen($filename, "w");
+$user_id = $_SESSION['user_id'];
+$userStatement = $db->prepare("SELECT * FROM user WHERE Id_user = :user_id");
+$userStatement->bindParam(':user_id', $user_id);
+$userStatement->execute();
+$user = $userStatement->fetch();
 
-// Écrire des données de session dans le fichier
-fwrite($handle, json_encode($_SESSION));
-fwrite($handle, "");
+echo "Bienvenue, " . $user['Pseudo'];
 
-// Fermer le fichier
-fclose($handle);
+echo "<a href='deconnexion.php'>Deconnexion</a>";
 
-// Afficher le nom du fichier temporaire
-echo "Fichier temporaire créé : $filename";
 ?>
