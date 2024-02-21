@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 19 fév. 2024 à 08:42
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Généré le : mer. 21 fév. 2024 à 13:06
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,10 +37,10 @@ CREATE TABLE `acquisition` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `défis`
+-- Structure de la table `defis`
 --
 
-CREATE TABLE `défis` (
+CREATE TABLE `defis` (
   `Id_defis` int(11) NOT NULL,
   `Intitule defis` varchar(200) NOT NULL,
   `Difficulte` varchar(50) NOT NULL COMMENT '0:Facile\r\n1:Moyen\r\n2:Difficile',
@@ -50,10 +50,10 @@ CREATE TABLE `défis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Déchargement des données de la table `défis`
+-- Déchargement des données de la table `defis`
 --
 
-INSERT INTO `défis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Status`, `Argent gagne`) VALUES
+INSERT INTO `defis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Status`, `Argent gagne`) VALUES
 (1, 'Finir ses assiettes !', '0', 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -65,8 +65,8 @@ INSERT INTO `défis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Stat
 CREATE TABLE `item` (
   `Id_item` int(11) NOT NULL,
   `Type` varchar(50) NOT NULL COMMENT '0:Banniere\r\n1:Avatar',
-  `Image` int(11) NOT NULL,
-  `Intitule item` varchar(100) NOT NULL,
+  `Lien image` varchar(200) NOT NULL,
+  `Intitule item` varchar(50) NOT NULL,
   `Prix` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -95,8 +95,7 @@ CREATE TABLE `realisation` (
   `defis_Id` int(11) NOT NULL,
   `Niveau realisation` float NOT NULL,
   `Date debut` date NOT NULL,
-  `Date fin` date NOT NULL,
-  `Total score` int(11) NOT NULL
+  `Date fin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -111,6 +110,7 @@ CREATE TABLE `user` (
   `Mot de passe` varchar(50) NOT NULL,
   `Pseudo` varchar(50) NOT NULL,
   `Grade` varchar(50) NOT NULL,
+  `Total score` int(11) NOT NULL,
   `Monnaie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -118,8 +118,10 @@ CREATE TABLE `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`Id_user`, `Identifiant`, `Mot de passe`, `Pseudo`, `Grade`, `Monnaie`) VALUES
-(1, 'dydy@gmail.com', 'caca', 'Dydy', 'Bandeur de pétrole', 0);
+INSERT INTO `user` (`Id_user`, `Identifiant`, `Mot de passe`, `Pseudo`, `Grade`, `Total score`, `Monnaie`) VALUES
+(1, 'dydy@gmail.com', 'a16358be6e2306b153b1f071477e68837266075e', 'Dydy', 'Bandeur de pétrole', 0, 0),
+(2, 'theo.francius.pro@gmail.com', '45e7527f4b4f3facc568dc2cc04d50a4af877cb9', 'francth6', '', 0, 0),
+(3, 'nabil@gmail.com', 'b448adef6d5c7477a52776f504adc55d94364a98', 'Hambouk', '', 0, 0);
 
 --
 -- Index pour les tables déchargées
@@ -134,9 +136,9 @@ ALTER TABLE `acquisition`
   ADD KEY `item_Id` (`item_Id`);
 
 --
--- Index pour la table `défis`
+-- Index pour la table `defis`
 --
-ALTER TABLE `défis`
+ALTER TABLE `defis`
   ADD PRIMARY KEY (`Id_defis`);
 
 --
@@ -177,9 +179,9 @@ ALTER TABLE `acquisition`
   MODIFY `Id_acquisition` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `défis`
+-- AUTO_INCREMENT pour la table `defis`
 --
-ALTER TABLE `défis`
+ALTER TABLE `defis`
   MODIFY `Id_defis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -204,7 +206,7 @@ ALTER TABLE `realisation`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Contraintes pour les tables déchargées
@@ -227,7 +229,7 @@ ALTER TABLE `post`
 -- Contraintes pour la table `realisation`
 --
 ALTER TABLE `realisation`
-  ADD CONSTRAINT `realisation_ibfk_1` FOREIGN KEY (`defis_Id`) REFERENCES `défis` (`Id_defis`),
+  ADD CONSTRAINT `realisation_ibfk_1` FOREIGN KEY (`defis_Id`) REFERENCES `defis` (`Id_defis`),
   ADD CONSTRAINT `realisation_ibfk_2` FOREIGN KEY (`user_Id`) REFERENCES `user` (`Id_user`);
 COMMIT;
 
