@@ -1,0 +1,72 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(../images/ile_1920_1080.png   );
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#def{
+    position: absolute;
+    top:11vh;
+    left:44vw;
+    animation-name : flotement;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+#stat{
+    position: absolute;
+    top:26vh;
+    left:62vw;
+    animation-name : flotement;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+#prof{
+    position: absolute;
+    top:45vh;
+    left:47vw;
+    animation-name : flotement;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+#soc{
+    position: absolute;
+    top:56vh;
+    left:30vw;
+    animation-name : flotement;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+#sho{
+    position: absolute;
+    top:68vh;
+    left:64vw;
+    animation-name : flotement;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes flotement{
+    0%{
+        margin-top: -5px;
+    }
+    50%{
+        margin-top: 10px;
+    }
+    100%{
+        margin-top: -5px;
+    }
+}

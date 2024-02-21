@@ -7,6 +7,10 @@ $identifiant = $_POST["id"];
 $_POST["id"] = filter_input(INPUT_POST,"id", FILTER_SANITIZE_SPECIAL_CHARS);
 $mdp = sha1($_POST["mdp"]);
 
+// test
+$_SESSION['identifiant'] = $identifiant;
+$_SESSION['mdp'] = $mdp;
+
 echo $identifiant;
 echo $mdp;
 

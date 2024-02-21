@@ -1,21 +1,50 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+$identifiant = $_SESSION['identifiant'];
+$mdp = $_SESSION['mdp'];
 
-// Créer un fichier temporaire
-$filename = tempnam('C:/xampp/tmp', "session_data_");
+echo $identifiant;
+echo "</br>";
+echo $mdp;
+echo "</br>";
+echo "</br>";
 
-// Ouvrir le fichier temporaire en écriture
-$handle = fopen($filename, "w");
+// Récupération des identifiants et du mot de passe
+// $identifiant = $_POST["id"];
+// $mdp = sha1($_POST["mdp"]);
 
-// Écrire des données de session dans le fichier
-fwrite($handle, json_encode($_SESSION));
-fwrite($handle, "");
+// Spécifie le chemin vers le répertoire temporaire de XAMPP
+$tmpDir = 'C:/xampp/tmp'; // Assurez-vous d'adapter ce chemin à votre installation XAMPP
 
-// Fermer le fichier
-fclose($handle);
+// Crée un fichier temporaire dans le répertoire temporaire de XAMPP
+$tmpFile = tempnam($tmpDir, 'example_');
 
-// Afficher le nom du fichier temporaire
-echo "Fichier temporaire créé : $filename";
+// Vérifie si le fichier temporaire a été créé avec succès
+if ($tmpFile !== false) {
+    // Ouvre le fichier en mode écriture
+    $handle = fopen($tmpFile, 'w');
+
+    // Vérifie si l'ouverture du fichier a réussi
+    if ($handle !== false) {
+        // Écrit l'identifiant et le mot de passe dans le fichier
+        fwrite($handle, "Identifiant: $identifiant\n");
+        fwrite($handle, "Mot de passe: $mdp\n");
+
+        // Ferme le fichier
+        fclose($handle);
+
+        echo "Identifiant et mot de passe ajoutés avec succès dans le fichier temporaire : $tmpFile";
+    } else {
+        echo "Impossible d'ouvrir le fichier temporaire en écriture";
+    }
+} else {
+    echo "Impossible de créer le fichier temporaire";
+}
+echo "</br>";
+echo "</br>"; 
 ?>
+
+
+<h1>Bienvenue a vous <?php echo $identifiant ?></h1>
+
+<a href="deconnexion.php">Deconnexion</a>
