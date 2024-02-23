@@ -48,3 +48,4 @@ echo "</br>";
 <h1>Bienvenue a vous <?php echo $identifiant ?></h1>
 
 <a href="deconnexion.php">Deconnexion</a>
+<a href="defis.php">Défis</a>
