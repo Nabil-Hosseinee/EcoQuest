@@ -3,11 +3,11 @@ session_start();
 $identifiant = $_SESSION['identifiant'];
 $mdp = $_SESSION['mdp'];
 
-echo $identifiant;
-echo "</br>";
-echo $mdp;
-echo "</br>";
-echo "</br>";
+// echo $identifiant;
+// echo "</br>";
+// echo $mdp;
+// echo "</br>";
+// echo "</br>";
 
 // Récupération des identifiants et du mot de passe
 // $identifiant = $_POST["id"];
@@ -33,18 +33,58 @@ if ($tmpFile !== false) {
         // Ferme le fichier
         fclose($handle);
 
-        echo "Identifiant et mot de passe ajoutés avec succès dans le fichier temporaire : $tmpFile";
+        // echo "Identifiant et mot de passe ajoutés avec succès dans le fichier temporaire : $tmpFile";
     } else {
         echo "Impossible d'ouvrir le fichier temporaire en écriture";
     }
 } else {
     echo "Impossible de créer le fichier temporaire";
 }
-echo "</br>";
-echo "</br>"; 
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoQuest | accueil</title>
+    <link rel="stylesheet" href="./css/accueil.css">
+    <link rel="stylesheet" href="./css/general.css">
+    <script src="https://kit.fontawesome.com/96e027db6d.js" crossorigin="anonymous"></script>
+</head>
+<body>
 
-<h1>Bienvenue a vous <?php echo $identifiant ?></h1>
+    <div class="info">
+        <h1>Bienvenue, <?php echo $identifiant ?></h1>
+    </div>
 
-<a href="deconnexion.php">Deconnexion</a>
+    <div class="container">
+        <img src="./images/carte.jpg" alt="" class="responsive-image">
+    </div>
+
+    <div class="point defis_point" data-text="Défis">
+        <a href=""><i class="fa-solid fa-location-dot"></i></a>
+    </div>
+
+    <div class="point profil_point" data-text="Profil">
+        <a href="profil.html"><i class="fa-solid fa-location-dot"></i></a>
+    </div>
+
+    <div class="point reseau_point" data-text="Réseau">
+        <a href=""><i class="fa-solid fa-location-dot"></i></a>
+    </div>
+
+    <div class="point dashboard_point" data-text="Dashboard">
+        <a href=""><i class="fa-solid fa-location-dot"></i></a>
+    </div>
+
+    <div class="point shop_point" data-text="Boutique">
+        <a href=""><i class="fa-solid fa-location-dot"></i></a>
+    </div>
+
+    
+    
+</body>
+</html>
+
+

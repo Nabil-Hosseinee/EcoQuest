@@ -1,9 +1,9 @@
 body{
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
-    background-image: url(../images/ile_1920_1080.png   );
+    background-image: url(../images/ile_1920_1080.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

@@ -2,48 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/mystyle.css">
-    <title>Accueil</title>
+    <title>Document</title>
+    <style>
+      body {
+        min-height: 100vh;
+        background-color: #98CE94;
+      }
+      /* HTML: <div class="loader"></div> */
+      .loader {
+        position: absolute;
+        top: 50vh;
+        left: 50vw;
+        width: calc(6*30px);
+        height: 50px;
+        display: flex;
+        color: #8d7958;
+        filter: drop-shadow(30px 25px 0 currentColor) drop-shadow(60px 0 0 currentColor) drop-shadow(120px 0 0 currentColor);
+        clip-path: inset(0 100% 0 0);
+        animation: l11 2s infinite steps(7);
+      }
+      .loader:before {
+        content: "";
+        width: 30px;
+        height: 25px;
+        background: currentColor;
+        clip-path: polygon(0 50%,30% 40%,100% 0,60% 40%,100% 50%,60% 60%,100% 100%,30% 60%);
+      }
+      @keyframes l11 {
+        100% {clip-path: inset(0 -30px 0 0)}
+      }
+    </style>
 </head>
 <body>
-
-    <div class="defis">
-        <a href=defis.html>
-            <img src="./images/icon map.png" id="def" alt="checkpoint">
-        </a>
-    </div>
-
-    <div class="stats">
-        <a href=defis.html>
-        <img src="./images/icon map.png" id="stat" alt="checkpoint">
-
-
-        </a>
-    </div>
-
-    <div class="profil">
-        <a href=defis.html>
-        <img src="./images/icon map.png" id="prof" alt="checkpoint">
-
-
-        </a>
-    </div>
-
-    <div class="social">
-        <a href=defis.html>
-        <img src="./images/icon map.png" id="soc" alt="checkpoint">
-
-        </a>
-    </div>
-
-    <div class="shop">
-        <a href=defis.html>
-            <img src="./images/icon map.png" id="sho" alt="checkpoint">
-
-        </a>
-    </div>
-    
+  <div class="loader"></div>
+  <div class="loader2"></div>
 </body>
 </html>

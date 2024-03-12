@@ -1,0 +1,131 @@
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.info {
+    width: 50vw;
+    height: 15vh;
+    background-color: rgb(255, 107, 132, 0.5);
+    position: absolute;
+    top: 10vh;
+    left: 28vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 2px solid white;
+    border-radius: 16px;
+    text-shadow: 4px 4px 2px rgba(0,0,0,0.6);
+}
+
+.info h1 {
+    font-size: clamp(5px, 5vw, 50px);
+}
+
+.container {
+    width: 100%; /* Assure que le conteneur prend la largeur complète de son parent */
+    max-width: 100vw; /* Vous pouvez ajuster cette valeur selon vos besoins */
+    min-height: 100vh;
+    margin: 0 auto; /* Centre le conteneur horizontalement */
+}
+
+.responsive-image {
+    width: 100%; /* L'image occupe 100% de la largeur de son conteneur */
+    height: auto; /* Laisse le navigateur calculer automatiquement la hauteur pour conserver les proportions */
+    display: block; /* Assure que l'image est affichée comme un élément de bloc pour gérer le remplissage et la marge correctement */
+    max-width: 100%; /* Garantit que l'image ne dépasse pas sa taille originale */
+}
+
+.point a {
+    text-decoration: none;
+}
+
+.point a i {
+    font-size: 7vh;
+    color: rgb(255, 107, 132);
+    cursor: pointer;
+}
+
+.point:hover {
+    animation-play-state: paused;
+}
+
+.reseau_point {
+    position: absolute;
+    top: 43vh;
+    left: 48vw;
+    animation: float 2s infinite;
+}
+
+.shop_point {
+    position: absolute;
+    top: 65vh;
+    left: 73vw;
+    animation: float 2s infinite;
+    animation-delay: 0.5s;
+}
+
+.defis_point {
+    position: absolute;
+    top: 75vh;
+    left: 35vw;
+    animation: float 2s infinite;
+    animation-delay: 1s;
+}
+
+.profil_point {
+    position: absolute;
+    top: 37vh;
+    left: 27vw;
+    animation: float 2s infinite;
+    animation-delay: 1.5s;
+}
+
+.dashboard_point {
+    position: absolute;
+    top: 33vh;
+    left: 68vw;
+    animation: float 2s infinite;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+
+/* text-container */
+@keyframes slideIn {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+.point:hover::before {
+    content: attr(data-text);
+    position: absolute;
+    top: -5vh; /* Ajustez la position verticale du texte */
+    left: -2.5vw;
+    transform: translateX(-50%);
+    background-color: rgb(255, 107, 132, 0.9); /* Couleur de fond du texte */
+    color: white; /* Couleur du texte */
+    font-weight: bold;
+    padding: 10px 50px; /* Espace intérieur du texte */
+    border-radius: 5px; /* Arrondi des coins */
+    animation: slideIn 0.5s forwards; /* Applique l'animation d'apparition */
+    font-size: 16px;
+}
+
+.text-container {
+    position: relative;
+    width: 200px; /* Ajustez la largeur du conteneur selon vos besoins */
+    height: 200px; /* Ajustez la hauteur du conteneur selon vos besoins */
+}
+
+
+
