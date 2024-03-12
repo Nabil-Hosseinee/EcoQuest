@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 21 fév. 2024 à 13:06
+-- Généré le : mar. 12 mars 2024 à 08:41
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -45,16 +45,23 @@ CREATE TABLE `defis` (
   `Intitule defis` varchar(200) NOT NULL,
   `Difficulte` varchar(50) NOT NULL COMMENT '0:Facile\r\n1:Moyen\r\n2:Difficile',
   `Score` int(11) NOT NULL,
-  `Status` tinyint(3) NOT NULL COMMENT '0:Etat initial\r\n1:En cours\r\n2:Résolu\r\n',
-  `Argent gagne` int(11) NOT NULL
+  `Status` tinyint(4) NOT NULL COMMENT '0:Etat initial\r\n1:En cours\r\n2:Résolu\r\n3:Sélectionné',
+  `Argent gagne` int(11) NOT NULL,
+  `date_expiration` datetime NOT NULL DEFAULT concat(curdate(),' 23:59:59'),
+  `Date_debut` date NOT NULL DEFAULT (curdate() + interval 7 - dayofweek(curdate()) day)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `defis`
 --
 
-INSERT INTO `defis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Status`, `Argent gagne`) VALUES
-(1, 'Finir ses assiettes !', '0', 0, 0, 0);
+INSERT INTO `defis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Status`, `Argent gagne`, `date_expiration`, `Date_debut`) VALUES
+(2, 'Utilise un sac de courses réutilisable\r\n', '0', 25, 0, 100, '2024-03-01 23:59:59', '2024-03-02'),
+(3, 'Fais un repas végétarien', '1', 50, 0, 250, '2024-03-01 23:59:59', '2024-03-02'),
+(4, 'Fais du covoiturage', '2', 100, 0, 400, '2024-03-01 23:59:59', '2024-03-02'),
+(5, 'Utilise une gourde', '0', 20, 0, 80, '2024-03-01 23:59:59', '2024-03-02'),
+(6, 'Prend les transports en commun au lieu de ta voiture', '1', 45, 0, 200, '2024-03-01 23:59:59', '2024-03-02'),
+(7, 'Répare un objet', '2', 90, 0, 350, '2024-03-01 23:59:59', '2024-03-02');
 
 -- --------------------------------------------------------
 
@@ -182,7 +189,7 @@ ALTER TABLE `acquisition`
 -- AUTO_INCREMENT pour la table `defis`
 --
 ALTER TABLE `defis`
-  MODIFY `Id_defis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id_defis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `item`
