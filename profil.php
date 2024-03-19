@@ -1,3 +1,33 @@
+<?php 
+
+include("connect_bdd.php");
+
+
+$demandeBanner = "SELECT * FROM `item` WHERE `Type` = 'Banniere'";
+$resultBanner = $db->prepare($demandeBanner);
+$resultBanner->execute();
+$defBanner = $resultBanner->fetchAll(PDO::FETCH_ASSOC);
+
+
+$demandeAvatar = "SELECT * FROM `item` WHERE `Type` = 'Avatar'";
+$resultAvatar = $db->prepare($demandeAvatar);
+$resultAvatar->execute();
+$defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
+
+// echo "<pre>";
+// var_dump($def);
+// echo "<pre>";
+
+// foreach ($def as $defis) {
+//     echo $defis['Intitule item'];
+//     echo '<br>';
+//     echo $defis['Lien image'];
+//     echo '<br>';
+//     echo '<br>';
+// }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +45,7 @@
     </div>
 
     
-      
+    
     <div id="menu">
 
         <div class="info">
@@ -31,7 +61,7 @@
         </div>
     
         <div class="point profil_point" data-text="Profil">
-            <a href="profil.html"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="profil.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point reseau_point" data-text="Réseau">
@@ -39,7 +69,7 @@
         </div>
     
         <div class="point dashboard_point" data-text="Dashboard">
-            <a href=""><i class="fa-solid fa-location-dot"></i></a>
+            <a href="dash.html"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point shop_point" data-text="Boutique">
@@ -55,19 +85,32 @@
         <h2>Customiser mon Profil</h2>
         <p>Mes Bannières</p>
         <div class="banniere">
-            <img class="select-banner" src="./images/banner1.avif" alt="">
+            <?php 
+            
+                foreach ($defBanner as $defis) {
+                    echo "<img class='select-banner' src=" . $defis['Lien image'] ." alt= " . $defis['Intitule item'] . ">";
+                }
+
+            ?>
+            <!-- <img class="select-banner" src="./images/banner1.avif" alt="">
             <img class="select-banner" src="./images/banner2.avif" alt="">
             <img class="select-banner" src="./images/banner3.avif" alt="">
-            <img class="select-banner" src="./images/banner1.avif" alt="">
+            <img class="select-banner" src="./images/banner1.avif" alt=""> -->
         </div>
         <p>Avatar</p>
         <div class="avatar">
-            <img class="select-avatar" src="./images/avatar1.webp" alt="">
+            <!-- <img class="select-avatar" src="./images/avatar1.webp" alt="">
             <img class="select-avatar" src="./images/avatar2.jpg" alt="">
             <img class="select-avatar" src="./images/avatar3.jpg" alt="">
             <img class="select-avatar" src="./images/avatar1.webp" alt="">
             <img class="select-avatar" src="./images/avatar1.webp" alt="">
-            <img class="select-avatar" src="./images/avatar2.jpg" alt="">
+            <img class="select-avatar" src="./images/avatar2.jpg" alt=""> -->
+            
+            <?php 
+                foreach ($defAvatar as $defis) {
+                    echo "<img class='select-avatar' src=" . $defis['Lien image'] ." alt= " . $defis['Intitule item'] . ">";
+                }
+            ?>
         </div>
     </div>
 
@@ -86,41 +129,15 @@
     <div class="container">
         <div class="defi-info">
             <h2>Défis</h2>
-            <!-- <div class="defis-container">
-                <div class="defis-img">
-                    <div class="box box-defis1"></div>
-                    <div class="box box-defis2"></div>
-                    <div class="box box-defis3"></div>
-                </div>
-                <div class="defis-intitule">
-                    <div class="intitule">
-                        <p>Coller 15 étiquettes "stop-pub"</p>
-                        <div class="avancement"></div>
-                    </div>
-                    <div class="intitule">
-                        <p>Coller 15 étiquettes "stop-pub"</p>
-                        <div class="avancement"></div>
-                    </div>
-                    <div class="intitule">
-                        <p>Coller 15 étiquettes "stop-pub"</p>
-                        <div class="avancement"></div>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="box" id="box">
-                <!-- <div class="test"></div> -->
                 <div class="icon">
                     <div class="box icon-container">
                         <i class="fa-solid fa-bicycle"></i>
                     </div>
                 </div>
                 <div class="description">
-                    <!-- balise php on récupère la difficulté du défis -->
                     <h3>Défis 1 | Moyen</h3>
-                    <!-- balise php, on récupère l'intitule du défis -->
                     <p>Parcourir 20km en vélos dans une journée.</p>
-
                     <div class="progress-bar__wrapper">
                         <label class="progress-bar__value" htmlFor="progress-bar"> 90% </label>
                         <progress id="progress-bar" value="90" max="100"><progress>

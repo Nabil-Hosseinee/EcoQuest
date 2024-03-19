@@ -23,7 +23,7 @@ $user = $userStatement->fetchAll();
 foreach ($user as $users) {
     if (($identifiant == $users['Identifiant'] || $identifiant == $users['Pseudo']) && $mdp == $users['Mot de passe']) {
         header("Location: accueil.php");
-    }
+    }   
     else {
         $message = "Identifiant ou mot de passe invalide.";
         echo "<script>alert('$message'); window.location.href = 'index.html';</script>";
