@@ -55,11 +55,9 @@ foreach ($users as $user) {
         }
 
         header("Location: accueil.php");
-        exit; 
     } else {
         $message = "Identifiant ou mot de passe invalide.";
         echo "<script>alert('$message'); window.location.href = 'index.html';</script>";
-        exit; 
     }
 }
 ?>
