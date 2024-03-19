@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 12 mars 2024 à 08:41
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Généré le : mar. 19 mars 2024 à 09:42
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,8 @@ CREATE TABLE `acquisition` (
   `Id_acquisition` int(11) NOT NULL,
   `user_Id` int(11) NOT NULL,
   `item_Id` int(11) NOT NULL,
-  `Date achat` date NOT NULL
+  `Date achat` date NOT NULL,
+  `Obtenu` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -62,6 +63,28 @@ INSERT INTO `defis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Statu
 (5, 'Utilise une gourde', '0', 20, 0, 80, '2024-03-01 23:59:59', '2024-03-02'),
 (6, 'Prend les transports en commun au lieu de ta voiture', '1', 45, 0, 200, '2024-03-01 23:59:59', '2024-03-02'),
 (7, 'Répare un objet', '2', 90, 0, 350, '2024-03-01 23:59:59', '2024-03-02');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `defis_quotidiens`
+--
+
+CREATE TABLE `defis_quotidiens` (
+  `Id_defis_quotidiens` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `defi_id1` int(11) NOT NULL,
+  `defi_id2` int(11) NOT NULL,
+  `defi_id3` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `defis_quotidiens`
+--
+
+INSERT INTO `defis_quotidiens` (`Id_defis_quotidiens`, `user_id`, `date`, `defi_id1`, `defi_id2`, `defi_id3`) VALUES
+(3, 1, '2024-03-19', 7, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -149,6 +172,16 @@ ALTER TABLE `defis`
   ADD PRIMARY KEY (`Id_defis`);
 
 --
+-- Index pour la table `defis_quotidiens`
+--
+ALTER TABLE `defis_quotidiens`
+  ADD PRIMARY KEY (`Id_defis_quotidiens`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `defi_id1` (`defi_id1`,`defi_id2`,`defi_id3`),
+  ADD KEY `defi_id2` (`defi_id2`),
+  ADD KEY `defi_id3` (`defi_id3`);
+
+--
 -- Index pour la table `item`
 --
 ALTER TABLE `item`
@@ -192,6 +225,12 @@ ALTER TABLE `defis`
   MODIFY `Id_defis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT pour la table `defis_quotidiens`
+--
+ALTER TABLE `defis_quotidiens`
+  MODIFY `Id_defis_quotidiens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT pour la table `item`
 --
 ALTER TABLE `item`
@@ -225,6 +264,15 @@ ALTER TABLE `user`
 ALTER TABLE `acquisition`
   ADD CONSTRAINT `acquisition_ibfk_1` FOREIGN KEY (`user_Id`) REFERENCES `user` (`Id_user`),
   ADD CONSTRAINT `acquisition_ibfk_2` FOREIGN KEY (`item_Id`) REFERENCES `item` (`Id_item`);
+
+--
+-- Contraintes pour la table `defis_quotidiens`
+--
+ALTER TABLE `defis_quotidiens`
+  ADD CONSTRAINT `defis_quotidiens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`Id_user`),
+  ADD CONSTRAINT `defis_quotidiens_ibfk_2` FOREIGN KEY (`defi_id1`) REFERENCES `defis` (`Id_defis`),
+  ADD CONSTRAINT `defis_quotidiens_ibfk_3` FOREIGN KEY (`defi_id2`) REFERENCES `defis` (`Id_defis`),
+  ADD CONSTRAINT `defis_quotidiens_ibfk_4` FOREIGN KEY (`defi_id3`) REFERENCES `defis` (`Id_defis`);
 
 --
 -- Contraintes pour la table `post`
