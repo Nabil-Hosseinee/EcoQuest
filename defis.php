@@ -58,120 +58,118 @@
 
 
     <section class="quotidien">
-    <div class="left">
-        <h2>
-            Défis Quotidiens
-        </h2>
-        <p>
-            Terminer vos défis quotidiens écologiques, c'est comme devenir un aventurier de l'éco, explorant un monde de solutions vertes avec enthousiasme et créativité pour un avenir plus cool et plus vert !
-        </p>
-        <img src="./images/defis_quotidien.png" alt="">
-    </div>
-    <div class="right">
-        <?php
-        include('connect_bdd.php');
+        <div class="left">
+            <h2>Défis Quotidiens</h2>
+            <p>Terminer vos défis quotidiens écologiques, c'est comme devenir un aventurier de l'éco, explorant un monde de solutions vertes avec enthousiasme et créativité pour un avenir plus cool et plus vert !</p>
+            <img src="./images/defis_quotidien.png" alt="">
+        </div>
+        <div class="right">
+            <?php
+                include('connect_bdd.php');
 
-        $sql_select_defis = "SELECT defis.*, defis_quotidiens.defi_id1, defis_quotidiens.defi_id2, defis_quotidiens.defi_id3 
-                             FROM defis_quotidiens 
-                             INNER JOIN defis ON defis_quotidiens.defi_id1 = defis.Id_defis 
-                                               OR defis_quotidiens.defi_id2 = defis.Id_defis 
-                                               OR defis_quotidiens.defi_id3 = defis.Id_defis";
-        $result_select_defis = $db->prepare($sql_select_defis);
-        $result_select_defis->execute();
-        $defis_quotidiens = $result_select_defis->fetchAll(PDO::FETCH_ASSOC);
+                $sql_select_defis = "SELECT defis.*, defis_quotidiens.defi_id1, defis_quotidiens.defi_id2, defis_quotidiens.defi_id3, defis_quotidiens.Id_defis_quotidiens
+                                    FROM defis_quotidiens 
+                                    INNER JOIN defis ON defis_quotidiens.defi_id1 = defis.Id_defis 
+                                                    OR defis_quotidiens.defi_id2 = defis.Id_defis 
+                                                    OR defis_quotidiens.defi_id3 = defis.Id_defis";
+                $result_select_defis = $db->prepare($sql_select_defis);
+                $result_select_defis->execute();
+                $defis_quotidiens = $result_select_defis->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($defis_quotidiens as $defi_quotidien) {
-            $difficulte_defi = "";
-            switch ($defi_quotidien["Difficulte"]) {
-                case 0:
-                    $difficulte_defi = "facile";
-                    break;
-                case 1:
-                    $difficulte_defi = "moyen";
-                    break;
-                case 2:
-                    $difficulte_defi = "difficile";
-                    break;
-                default:
-                    $difficulte_defi = "Inconnu";
-            }
-
-            echo '<div class="box">' .
-                '<div class="icon-container">' .
-                '<i class="fa-solid fa-bicycle"></i>' .
-                '</div>' .
-                '<div class="description">' .
-                '<h3>Défi ' . $difficulte_defi . '</h3>' .
-                '<p>' . $defi_quotidien["Intitule defis"] . '</p>' .
-                '<div class="progress-bar__wrapper">' .
-                '<label class="progress-bar__value" htmlFor="progress-bar"> 90% </label>' .
-                '<progress id="progress-bar" value="90" max="100"></progress>' .
-                '</div>' .
-                '</div>' .
-                '</div>';
-        }
-        ?>
+                foreach ($defis_quotidiens as $defi_quotidien) {
+                    $id_defis_quotidiens = $defi_quotidien['Id_defis'];
+                    $difficulte_defi = "";
+                    switch ($defi_quotidien["Difficulte"]) {
+                        case 0:
+                            $difficulte_defi = "facile";
+                            break;
+                        case 1:
+                            $difficulte_defi = "moyen";
+                            break;
+                        case 2:
+                            $difficulte_defi = "difficile";
+                            break;
+                        default:
+                            $difficulte_defi = "Inconnu";
+                    }
+                    
+                    $intitule=$defi_quotidien['Intitule defis'];
+                    $status=$defi_quotidien['Status'];
+                
+                    echo "<div class='box'>
+                        <div class='icon-container'>
+                        <i class='fa-solid fa-bicycle'></i>
+                        </div>
+                        <div class='description'>
+                        <h3>Défi $difficulte_defi</h3>
+                        <p>$intitule</p>";
+                    
+                        if ($status==2) {
+                        echo "Défi complété";
+                    }
+                    else {
+                        echo "<form action='defi_realise.php' method='post' id='$id_defis_quotidiens'>
+                        <input type='hidden' name='defi_id' value='$id_defis_quotidiens' form='$id_defis_quotidiens'>
+                        <button type='submit' name='complete_defi' form='$id_defis_quotidiens'>Compléter le défi</button>
+                        </form>";
+                    }
+                        
+                    echo "</div>
+                        </div>";
+                }
+            ?>
         </div>
     </section>
 
-
     <section class="alldefis">
-    <h2>Liste de tous les défis</h2>
+        <h2>Liste de tous les défis</h2>
 
-    <ul class="defis-filtre">
-        <li class="list defis-filtre-active" data-filter="all">Tout</li>
-        <li class="list" data-filter="facile">Facile</li>
-        <li class="list" data-filter="moyen">Moyen</li>
-        <li class="list" data-filter="difficile">Difficile</li>
-    </ul>
+        <ul class="defis-filtre">
+            <li class="list defis-filtre-active" data-filter="all">Tout</li>
+            <li class="list" data-filter="facile">Facile</li>
+            <li class="list" data-filter="moyen">Moyen</li>
+            <li class="list" data-filter="difficile">Difficile</li>
+        </ul>
 
-    <!-- container -->
-    <div class="defis-container">
-        <?php
-        include('connect_bdd.php');
+        <div class="defis-container">
+            <?php
+                include('connect_bdd.php');
 
-        // Récupérer tous les défis de la base de données
-        $sql_select_defis = "SELECT * FROM defis";
-        $result_select_defis = $db->prepare($sql_select_defis);
-        $result_select_defis->execute();
-        $defis = $result_select_defis->fetchAll(PDO::FETCH_ASSOC);
+                $sql_select_defis = "SELECT * FROM defis";
+                $result_select_defis = $db->prepare($sql_select_defis);
+                $result_select_defis->execute();
+                $defis = $result_select_defis->fetchAll(PDO::FETCH_ASSOC);
 
-        // Boucle sur chaque défi pour l'affichage
-        foreach ($defis as $defi) {
-            $difficulte_defi = "";
-            switch ($defi["Difficulte"]) {
-                case 0:
-                    $difficulte_defi = "facile";
-                    break;
-                case 1:
-                    $difficulte_defi = "moyen";
-                    break;
-                case 2:
-                    $difficulte_defi = "difficile";
-                    break;
-                default:
-                    $difficulte_defi = "Inconnu";
-            }
+                foreach ($defis as $defi) {
+                    $difficulte_defi = "";
+                    switch ($defi["Difficulte"]) {
+                        case 0:
+                            $difficulte_defi = "facile";
+                            break;
+                        case 1:
+                            $difficulte_defi = "moyen";
+                            break;
+                        case 2:
+                            $difficulte_defi = "difficile";
+                            break;
+                        default:
+                            $difficulte_defi = "Inconnu";
+                    }
 
-            echo '<div class="box all-box ' . $difficulte_defi . '">' .
-                '<div class="icon all-icon">' .
-                '<div class="box icon-container">';
-            echo '</div>' .
-                '</div>' .
-                '<div class="description">' .
-                '<h3>Défi ' . $defi["Id_defis"] . ' | ' . ucfirst($difficulte_defi) . '</h3>' . 
-                '<p>' . $defi["Intitule defis"] . '</p>' .
-                '<div class="progress-bar__wrapper">' .
-                '<label class="progress-bar__value" htmlFor="progress-bar"> ' . $defi["Score"] . '% </label>' . 
-                '<progress id="progress-bar" value="' . $defi["Score"] . '" max="100"></progress>' .
-                '</div>' .
-                '</div>' .
-                '</div>';
-        }
-        ?>
-    </div>
-
-</section>
+                    echo '<div class="box all-box ' . $difficulte_defi . '">' .
+                        '<div class="icon all-icon">' .
+                        '<div class="box icon-container">';
+                    echo '</div>' .
+                        '</div>' .
+                        '<div class="description">' .
+                        '<h3>Défi ' . ucfirst($difficulte_defi) . '</h3>' . 
+                        '<p>' . $defi["Intitule defis"] . '</p>' .
+                        '</div>' .
+                        '</div>';
+                }
+            ?>
+        </div>
+    </section>
 
 
     <script>
