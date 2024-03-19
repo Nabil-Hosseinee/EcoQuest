@@ -24,9 +24,12 @@ foreach ($users as $user) {
 
         $date_actuelle = date('Y-m-d');
 
-        $sql_select_defis_quotidiens = "SELECT * FROM defis_quotidiens WHERE date = :date";
+        $user_id = $user['Id_user']; 
+
+        $sql_select_defis_quotidiens = "SELECT * FROM defis_quotidiens WHERE date = :date AND user_id= :user_id";
         $stmt_select_defis_quotidiens = $db->prepare($sql_select_defis_quotidiens);
         $stmt_select_defis_quotidiens->bindParam(':date', $date_actuelle);
+        $stmt_select_defis_quotidiens->bindParam(':user_id', $user_id);
         $stmt_select_defis_quotidiens->execute();
 
         if ($stmt_select_defis_quotidiens->rowCount() == 0) {
@@ -35,7 +38,7 @@ foreach ($users as $user) {
             $stmt_select_defis->execute();
             $defis_quotidiens = $stmt_select_defis->fetchAll(PDO::FETCH_ASSOC);
 
-            $user_id = $user['Id_user']; 
+            
 
             $sql_insert_defis_quotidiens = "INSERT INTO defis_quotidiens (date, user_id, defi_id1, defi_id2, defi_id3) VALUES (:date, :user_id, :defi_id1, :defi_id2, :defi_id3)";
             $stmt_insert_defis_quotidiens = $db->prepare($sql_insert_defis_quotidiens);
