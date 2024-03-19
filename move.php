@@ -38,8 +38,6 @@ foreach ($users as $user) {
             $stmt_select_defis->execute();
             $defis_quotidiens = $stmt_select_defis->fetchAll(PDO::FETCH_ASSOC);
 
-            
-
             $sql_insert_defis_quotidiens = "INSERT INTO defis_quotidiens (date, user_id, defi_id1, defi_id2, defi_id3) VALUES (:date, :user_id, :defi_id1, :defi_id2, :defi_id3)";
             $stmt_insert_defis_quotidiens = $db->prepare($sql_insert_defis_quotidiens);
             $stmt_insert_defis_quotidiens->bindParam(':date', $date_actuelle);
@@ -55,11 +53,11 @@ foreach ($users as $user) {
         }
 
         header("Location: accueil.php");
-        exit; 
+        //exit; 
     } else {
         $message = "Identifiant ou mot de passe invalide.";
         echo "<script>alert('$message'); window.location.href = 'index.html';</script>";
-        exit; 
+        //exit; 
     }
 }
 ?>
