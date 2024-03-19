@@ -7,8 +7,26 @@ ini_set("display_errors", 1);
 include('connect_bdd.php');
 
 $identifiant = $_SESSION['identifiant'];
-//ownitem: ;
 
+
+// Exécution de la requête SQL
+$requete = $db->prepare(
+    "SELECT * FROM item
+    LEFT JOIN  Obtenu ON acquisition = 1
+    LEFT JOIN item_id 
+    WHERE Pseudo = '$identifiant'");
+$requete->execute();
+
+SELECT * FROM objets
+LEFT JOIN objets_utilisateurs ON objets.id = objets_utilisateurs.id_objet AND objets_utilisateurs.id_utilisateur = 1
+WHERE objets_utilisateurs.id_objet IS NULL;
+
+
+
+// Récupération des résultats
+$resultatsitem = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+$ownitem: $resultatsitem;
 
 // Exécution de la requête SQL
 $requete = $db->prepare("SELECT Monnaie, Pseudo FROM user WHERE Pseudo = '$identifiant'");
