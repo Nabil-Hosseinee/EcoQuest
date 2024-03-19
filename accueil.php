@@ -63,7 +63,7 @@ if ($tmpFile !== false) {
     </div>
 
     <div class="point defis_point" data-text="Défis">
-        <a href="defis.html"><i class="fa-solid fa-location-dot"></i></a>
+        <a href="defis.php"><i class="fa-solid fa-location-dot"></i></a>
     </div>
 
     <div class="point profil_point" data-text="Profil">
@@ -71,7 +71,7 @@ if ($tmpFile !== false) {
     </div>
 
     <div class="point reseau_point" data-text="Réseau">
-        <a href=""><i class="fa-solid fa-location-dot"></i></a>
+        <a href="test.html"><i class="fa-solid fa-location-dot"></i></a>
     </div>
 
     <div class="point dashboard_point" data-text="Dashboard">

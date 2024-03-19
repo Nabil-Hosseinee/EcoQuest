@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 19 mars 2024 à 09:42
+-- Généré le : mar. 19 mars 2024 à 13:55
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -58,11 +58,11 @@ CREATE TABLE `defis` (
 
 INSERT INTO `defis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Status`, `Argent gagne`, `date_expiration`, `Date_debut`) VALUES
 (2, 'Utilise un sac de courses réutilisable\r\n', '0', 25, 0, 100, '2024-03-01 23:59:59', '2024-03-02'),
-(3, 'Fais un repas végétarien', '1', 50, 0, 250, '2024-03-01 23:59:59', '2024-03-02'),
+(3, 'Fais un repas végétarien', '1', 50, 2, 250, '2024-03-01 23:59:59', '2024-03-02'),
 (4, 'Fais du covoiturage', '2', 100, 0, 400, '2024-03-01 23:59:59', '2024-03-02'),
 (5, 'Utilise une gourde', '0', 20, 0, 80, '2024-03-01 23:59:59', '2024-03-02'),
 (6, 'Prend les transports en commun au lieu de ta voiture', '1', 45, 0, 200, '2024-03-01 23:59:59', '2024-03-02'),
-(7, 'Répare un objet', '2', 90, 0, 350, '2024-03-01 23:59:59', '2024-03-02');
+(7, 'Répare un objet', '2', 90, 2, 350, '2024-03-01 23:59:59', '2024-03-02');
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,8 @@ CREATE TABLE `defis_quotidiens` (
 --
 
 INSERT INTO `defis_quotidiens` (`Id_defis_quotidiens`, `user_id`, `date`, `defi_id1`, `defi_id2`, `defi_id3`) VALUES
-(3, 1, '2024-03-19', 7, 3, 2);
+(3, 1, '2024-03-19', 7, 3, 2),
+(4, 5, '2024-03-19', 6, 7, 3);
 
 -- --------------------------------------------------------
 
@@ -150,8 +151,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`Id_user`, `Identifiant`, `Mot de passe`, `Pseudo`, `Grade`, `Total score`, `Monnaie`) VALUES
 (1, 'dydy@gmail.com', 'a16358be6e2306b153b1f071477e68837266075e', 'Dydy', 'Bandeur de pétrole', 0, 0),
-(2, 'theo.francius.pro@gmail.com', '45e7527f4b4f3facc568dc2cc04d50a4af877cb9', 'francth6', '', 0, 0),
-(3, 'nabil@gmail.com', 'b448adef6d5c7477a52776f504adc55d94364a98', 'Hambouk', '', 0, 0);
+(5, 'fefe@gmail.com', '70c881d4a26984ddce795f6f71817c9cf4480e79', 'Félix', '', 0, 0);
 
 --
 -- Index pour les tables déchargées
@@ -228,7 +228,7 @@ ALTER TABLE `defis`
 -- AUTO_INCREMENT pour la table `defis_quotidiens`
 --
 ALTER TABLE `defis_quotidiens`
-  MODIFY `Id_defis_quotidiens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id_defis_quotidiens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `item`
@@ -252,7 +252,7 @@ ALTER TABLE `realisation`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Contraintes pour les tables déchargées
