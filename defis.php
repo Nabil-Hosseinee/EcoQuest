@@ -21,7 +21,9 @@ $id_num = $_SESSION['id_number'];
         <span></span>
     </div>
       
+    
     <div id="menu">
+
         <div class="info">
             <h2>Où voulez vous vous rendre ?</h2>
         </div>
@@ -39,15 +41,15 @@ $id_num = $_SESSION['id_number'];
         </div>
     
         <div class="point reseau_point" data-text="Réseau">
-            <a href=""><i class="fa-solid fa-location-dot"></i></a>
+            <a href="post.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point dashboard_point" data-text="Dashboard">
-            <a href="dash.html"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="dash.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point shop_point" data-text="Boutique">
-            <a href=""><i class="fa-solid fa-location-dot"></i></a>
+            <a href="shop.html"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     </div>
 
