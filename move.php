@@ -22,7 +22,6 @@ $users = $userStatement->fetchAll(PDO::FETCH_ASSOC);
 foreach ($users as $user) {
     if (($identifiant == $user['Identifiant'] || $identifiant == $user['Pseudo']) && $mdp == $user['Mot de passe']) {
 
-        // test ajout nab
         $test = $db->prepare("SELECT * FROM user WHERE Pseudo = :pseudo");
         $test->bindParam(':pseudo', $identifiant);
         $test->execute();
@@ -34,12 +33,13 @@ foreach ($users as $user) {
 
         foreach ($result as $results) {
             $id_num = $results['Id_user'];
+            $nom = $results['Nom'];
+            $pseudo = $results['Pseudo'];
         }
 
         $_SESSION['id_number'] = $id_num;
-        echo $id_num;
-        echo "<br>";
-        // fin test nab
+        $_SESSION['nom'] = $nom;
+        $_SESSION['pseudo'] = $pseudo;
 
         $date_actuelle = date('Y-m-d');
 

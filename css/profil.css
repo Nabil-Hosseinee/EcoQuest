@@ -295,19 +295,24 @@ button i {
 .banniere, .avatar {
   max-width: 100vw;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
 .banniere img, .avatar img {
-  width: 20%;
+  width: 10%;
   margin: 15px 30px;
   opacity: 0.7;
   transition: 0.5s ease;
 }
 
+.avatar {
+  margin-top: 50px;
+}
+
 .avatar img {
-  max-width: 15%;
+  max-width: 10%;
 }
 
 .banniere img:hover {
@@ -333,17 +338,18 @@ button i {
 .banner {
     min-height: 30vh;
     max-width: 100vw;
-    /* background-color: #98CE94; */
-    background-image: url(../images/banner3.avif);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     position: relative;
+    overflow: hidden;
 }
+
+.bg-banner {
+  min-height: 30vh;
+}
+
 
 .bg-banner img {
   width: 100%;
@@ -351,6 +357,8 @@ button i {
   position: absolute;
   top: 0;
   left: 0;
+  object-fit: cover;
+  /* filter: blur(1px); */
 }
 
 .banner-container {
@@ -362,6 +370,8 @@ button i {
     padding: 10px 0;
     /* z-index: 999; */
     position: absolute;
+    /* backdrop-filter: blur(3px); */
+    color: black;
 }
 
 .photo {
@@ -446,18 +456,17 @@ button i {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
-  height: 15vh;
+  width: 90%;
+  height: 18vh;
   /* font-family: 'Raleway'; */
   font-size: 2.5rem;
-  margin: 40px auto;
 }
 .box {
   --borderWidth: 3px;
   background: #92fcad;
   position: relative;
   border-radius: var(--borderWidth);
-  margin: 40px 0;
+  margin: 20px 0 20px 50px;
   padding: 20px 0;
   color: #421800;
 }
@@ -536,50 +545,74 @@ button i {
 .description h3 {
   margin-bottom: 15px;
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .description p {
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 15px;
+  text-align: center;
 }
 
-
-/* animation barre de progression */
-.progress-bar__wrapper {
-  position: relative;
-  display: flex;
+.description h6 {
+  font-size: 18px;
+  text-align: center;
 }
-.progress-bar__value {
-  position: absolute;
+
+.submit-container form {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 16px;
-  color: black;
+}
+
+
+
+/* tableau  */
+
+.donnees-infos {
+  width: 40vw;
+}
+
+.classement {
+  width: 100%;
+  margin-top: 50px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
   font-weight: bold;
 }
-progress {
-  width: 90%;
-  height: 20px;
-  border-radius: 50px;
-  background-color: #ddd;
-  transition: width 300ms ease;
+
+td {
+  background-color: #fff;
 }
-progress[value]::-webkit-progress-bar {
-  width: 100%;
-  height: 20px;
-  border-radius: 50px;
-  background-color: #ddd;
-  transition: width 300ms ease;
+
+tr:nth-child(even) td {
+  background-color: #f9f9f9;
 }
-progress[value]::-webkit-progress-value {
-  width: 0;
-  border-radius: 50px;
-  background-color: rgb(21, 187, 21);
-  transition: width 300ms ease;
+
+th:first-child, td:first-child {
+  border-left: 1px solid #ddd;
+}
+
+th:last-child, td:last-child {
+  border-right: 1px solid #ddd;
+}
+
+th, td {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

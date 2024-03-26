@@ -5,6 +5,7 @@ if (isset($_POST['pseudo'], $_POST['mdp'], $_POST['id'])) {
     $pseudo = $_POST['pseudo'];
     $mdp = sha1($_POST['mdp']);
     $id = $_POST['id'];
+    $nom = $_POST['nom'];
 
     // Vérification si le pseudo existe déjà
     $sql_check_pseudo = "SELECT * FROM user WHERE Pseudo = :pseudo";
@@ -38,8 +39,9 @@ if (isset($_POST['pseudo'], $_POST['mdp'], $_POST['id'])) {
     }
     else {
         // Les valeurs ne sont pas déjà présentes dans la base de données, insertion
-        $sql_insert = "INSERT INTO user (Identifiant, Pseudo, `Mot de passe`) VALUES (:id, :pseudo, :mdp)";
+        $sql_insert = "INSERT INTO user (Nom, Identifiant, Pseudo, `Mot de passe`) VALUES (:nom, :id, :pseudo, :mdp)";
         $stmt_insert = $db->prepare($sql_insert);
+        $stmt_insert->bindParam(':nom', $nom);
         $stmt_insert->bindParam(':id', $id);
         $stmt_insert->bindParam(':pseudo', $pseudo);
         $stmt_insert->bindParam(':mdp', $mdp);
