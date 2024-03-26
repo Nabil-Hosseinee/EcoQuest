@@ -43,7 +43,7 @@ $id_num = $_SESSION['id_number'];
         </div>
     
         <div class="point dashboard_point" data-text="Dashboard">
-            <a href="dash.html"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="dash.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point shop_point" data-text="Boutique">

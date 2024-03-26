@@ -35,11 +35,13 @@ foreach ($users as $user) {
             $id_num = $results['Id_user'];
             $nom = $results['Nom'];
             $pseudo = $results['Pseudo'];
+            $grade = $results['Grade'];
         }
 
         $_SESSION['id_number'] = $id_num;
         $_SESSION['nom'] = $nom;
         $_SESSION['pseudo'] = $pseudo;
+        $_SESSION['grade'] = $grade;
 
         $date_actuelle = date('Y-m-d');
 

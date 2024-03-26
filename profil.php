@@ -1,11 +1,11 @@
 <?php 
-session_start();
+include("connect_bdd.php");
+include("grade.php");
+
 $id_num = $_SESSION['id_number'];
 $nom = $_SESSION['nom'];
 $pseudo = $_SESSION['pseudo'];
-
-
-include("connect_bdd.php");
+$grade = $_SESSION['grade'];
 
 
 $demandeBanner = "SELECT * FROM `item` WHERE `Type` = 'Banniere'";
@@ -110,7 +110,7 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
         <div class="banner-container">
             <h1><?php echo $nom ?></h1>
             <div class="photo"><img id="affichage-avatar" src="./images/items/pp1.png" alt=""></div>
-            <div class="pseudo"><?php echo "@" . $pseudo?> / [Grade]</div>
+            <div class="pseudo"><?php echo "@" . $pseudo?> / [<?php echo $grade; ?>]</div>
         </div>
     </div>
 
@@ -191,6 +191,13 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
         <div class="donnees-infos">
             <h2>Classement</h2>
             <div class="classement">
+                <?php 
+                
+                    $select_user_classement = "SELECT * FROM user ORDER BY `Total score` DESC LIMIT 10";
+                    $classement_result = $db->prepare($select_user_classement);
+                    $classement_result->execute();
+                    $classement = $classement_result->fetchAll(PDO::FETCH_ASSOC);
+                ?>
                 <table>
                     <tr>
                         <th>Numéro</th>
@@ -198,66 +205,26 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
                         <th>Grade</th>
                         <th>Total Score</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>John</td>
-                        <td>Gold</td>
-                        <td>5000</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jane</td>
-                        <td>Silver</td>
-                        <td>4500</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Robert</td>
-                        <td>Platinum</td>
-                        <td>6000</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Alice</td>
-                        <td>Gold</td>
-                        <td>5500</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>John</td>
-                        <td>Gold</td>
-                        <td>5000</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Jane</td>
-                        <td>Silver</td>
-                        <td>4500</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Robert</td>
-                        <td>Platinum</td>
-                        <td>6000</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Alice</td>
-                        <td>Gold</td>
-                        <td>5500</td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Robert</td>
-                        <td>Platinum</td>
-                        <td>6000</td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Alice</td>
-                        <td>Gold</td>
-                        <td>5500</td>
-                    </tr>
+
+                    <?php
+                        $compteur = 1;
+                        foreach ($classement as $classements) {
+                            $pseudo_class = $classements['Pseudo'];
+                            $grade_class = $classements['Grade'];
+                            $score_class = $classements['Total score'];
+
+                            echo "
+                                <tr>
+                                    <td>$compteur</td>
+                                    <td>$pseudo_class</td>
+                                    <td>$grade_class</td>
+                                    <td>$score_class</td>
+                                </tr>
+                            ";
+
+                            $compteur+=1;
+                        }
+                    ?>
                 </table>
             </div>
         </div>
