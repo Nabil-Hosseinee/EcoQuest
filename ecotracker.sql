@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 26 mars 2024 à 19:02
+-- Généré le : mar. 26 mars 2024 à 23:37
 -- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.0.30
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -114,7 +114,16 @@ CREATE TABLE `defis_quotidiens` (
 --
 
 INSERT INTO `defis_quotidiens` (`Id_defis_quotidiens`, `user_id`, `date`, `defi_id1`, `defi_id2`, `defi_id3`) VALUES
-(5, 1, '2024-03-26', 20, 13, 32);
+(5, 1, '2024-03-26', 20, 13, 32),
+(6, 6, '2024-03-26', 38, 17, 43),
+(7, 5, '2024-03-26', 28, 44, 21),
+(8, 8, '2024-03-26', 11, 40, 42),
+(9, 9, '2024-03-26', 38, 30, 10),
+(10, 10, '2024-03-26', 35, 30, 34),
+(11, 11, '2024-03-26', 32, 44, 12),
+(12, 12, '2024-03-26', 30, 31, 45),
+(13, 13, '2024-03-26', 21, 37, 32),
+(14, 14, '2024-03-26', 22, 23, 39);
 
 -- --------------------------------------------------------
 
@@ -129,6 +138,29 @@ CREATE TABLE `item` (
   `Intitule item` varchar(50) NOT NULL,
   `Prix` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `item`
+--
+
+INSERT INTO `item` (`Id_item`, `Type`, `Lien image`, `Intitule item`, `Prix`) VALUES
+(1, 'Banniere', './images/items/ban1.jpg', 'Bannière 1', 1200),
+(2, 'Banniere', './images/items/ban2.jpg', 'Bannière 2', 1000),
+(3, 'Banniere', './images/items/ban3.jpg', 'Bannière 3', 800),
+(4, 'Banniere', './images/items/ban4.jpg', 'Bannière 4', 500),
+(5, 'Banniere', './images/items/banner4.jpg', 'Bannière 5', 1500),
+(6, 'Banniere', './images/items/banner5.jpg', 'Bannière 6', 1100),
+(7, 'Banniere', './images/items/ban5.png', 'Bannière 7', 1200),
+(8, 'Avatar', './images/items/pp1.png', 'Avatar 1', 150),
+(9, 'Avatar', './images/items/pp2.png', 'Avatar 2', 250),
+(10, 'Avatar', './images/items/pp3.png', 'Avatar 3', 350),
+(11, 'Avatar', './images/items/pp4.png', 'Avatar 4', 200),
+(12, 'Avatar', './images/items/pp5.png', 'Avatar 5', 170),
+(13, 'Avatar', './images/items/pp6.png', 'Avatar 6', 350),
+(14, 'Avatar', './images/items/pp7.png', 'Avatar 7', 320),
+(15, 'Avatar', './images/items/pp8.png', 'Avatar 8', 175),
+(16, 'Avatar', './images/items/pp9.png', 'Avatar 9', 125),
+(17, 'Avatar', './images/items/pp10.png', 'Avatar 10', 150);
 
 -- --------------------------------------------------------
 
@@ -161,8 +193,7 @@ CREATE TABLE `realisation` (
 --
 
 INSERT INTO `realisation` (`Id_realisation`, `user_Id`, `defis_Id`, `Statut`) VALUES
-(13, 1, 13, 2),
-(14, 1, 20, 2);
+(16, 1, 13, 2);
 
 -- --------------------------------------------------------
 
@@ -172,6 +203,7 @@ INSERT INTO `realisation` (`Id_realisation`, `user_Id`, `defis_Id`, `Statut`) VA
 
 CREATE TABLE `user` (
   `Id_user` int(11) NOT NULL,
+  `Nom` varchar(50) NOT NULL,
   `Identifiant` varchar(50) NOT NULL,
   `Mot de passe` varchar(50) NOT NULL,
   `Pseudo` varchar(50) NOT NULL,
@@ -184,9 +216,17 @@ CREATE TABLE `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`Id_user`, `Identifiant`, `Mot de passe`, `Pseudo`, `Grade`, `Total score`, `Monnaie`) VALUES
-(1, 'dydy@gmail.com', 'a16358be6e2306b153b1f071477e68837266075e', 'Dydy', 'Bandeur de pétrole', 55, 110),
-(5, 'fefe@gmail.com', '70c881d4a26984ddce795f6f71817c9cf4480e79', 'Félix', '', 0, 0);
+INSERT INTO `user` (`Id_user`, `Nom`, `Identifiant`, `Mot de passe`, `Pseudo`, `Grade`, `Total score`, `Monnaie`) VALUES
+(1, 'Dylan', 'dydy@gmail.com', 'a16358be6e2306b153b1f071477e68837266075e', 'Dydy', 'Débutant Écolo', 110, 220),
+(5, 'Félix', 'fefe@gmail.com', '70c881d4a26984ddce795f6f71817c9cf4480e79', 'Félix', 'Éco-Héros', 1000, 0),
+(6, 'Nabil', 'nab@gmail.com', '842ba8199bc58660cf8f8d5b93c232d9d8911b4a', 'Nab', 'Gardien de la Terre', 500, 0),
+(8, 'Théo', 'theo@gmail.com', 'cf91a9cfe0882326bc9e5276dcdb1cce8cbef4ce', 'Tété', 'Éco-Héros', 1200, 0),
+(9, 'Alison', 'alison@gmail.com', '4a4f22fbabc5d6375b354538de0249eb0a80f614', 'Ashley', 'Gardien de la Terre', 500, 0),
+(10, 'Manaelle', 'manaelle@gmail.com', '01a4c628bf98d409ada357ab6ad62302160d8013', 'Manaelle', 'Éco-Héros', 1800, 0),
+(11, 'Mathieu', 'mathieu@gmail.com', 'cc7c5be316e48d137cbb549833b85d91034d799d', 'Mathieu', 'Gardien de la Terre', 800, 0),
+(12, 'Carpentier', 'carpentier@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'Carpentier', 'Gardien de la Terre', 700, 0),
+(13, 'admin', 'admin@gmail.com', 'ab5311135a23a194fec8882cfa18ab24fa286f10', 'admin', 'Éco-Héros', 1300, 0),
+(14, 'Joetzer', 'joetzer@gmail.com', '1af2dd2154acccc0985ba300880ea1157825b016', 'Joetzer', 'Éco-Héros', 1700, 0);
 
 --
 -- Index pour les tables déchargées
@@ -263,13 +303,13 @@ ALTER TABLE `defis`
 -- AUTO_INCREMENT pour la table `defis_quotidiens`
 --
 ALTER TABLE `defis_quotidiens`
-  MODIFY `Id_defis_quotidiens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id_defis_quotidiens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `item`
 --
 ALTER TABLE `item`
-  MODIFY `Id_item` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `post`
@@ -281,13 +321,13 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT pour la table `realisation`
 --
 ALTER TABLE `realisation`
-  MODIFY `Id_realisation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `Id_realisation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Contraintes pour les tables déchargées
