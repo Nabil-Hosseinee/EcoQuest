@@ -3,11 +3,12 @@
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
-    background-color: #000000; 
+    background-color: #ffb6c1; 
     color: #fff; 
     padding: 10px 20px; 
     font-size: 20px; 
     text-align: center;
+    border-radius: 25%;
 }
 
 body {
@@ -232,20 +233,26 @@ body {
   
  .avatar_container {
   width: 50%;
-  background-color: rgb(206, 206, 206);
+  background-color: #BDE3FF;
   border-radius: 5%;
   margin: 5%;
   justify-content: center;
+  text-align: center;
  }
 
  .banner_container {
   width: 50%;
-  background-color:  rgb(206, 206, 206);
+  background-color:  #BDE3FF;
   border-radius: 5%;
   margin: 5%;
   justify-content: center;
+  text-align: center;
 }
-  
+
+.buybutton {
+  width: 30px;
+  align-items: center;
+}
 
 /* bannière */
 .banner {
