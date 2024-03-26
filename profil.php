@@ -1,4 +1,9 @@
 <?php 
+session_start();
+$id_num = $_SESSION['id_number'];
+$nom = $_SESSION['nom'];
+$pseudo = $_SESSION['pseudo'];
+
 
 include("connect_bdd.php");
 
@@ -13,19 +18,6 @@ $demandeAvatar = "SELECT * FROM `item` WHERE `Type` = 'Avatar'";
 $resultAvatar = $db->prepare($demandeAvatar);
 $resultAvatar->execute();
 $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
-
-// echo "<pre>";
-// var_dump($def);
-// echo "<pre>";
-
-// foreach ($def as $defis) {
-//     echo $defis['Intitule item'];
-//     echo '<br>';
-//     echo $defis['Lien image'];
-//     echo '<br>';
-//     echo '<br>';
-// }
-
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +43,15 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
         <div class="info">
             <h2>Où voulez vous vous rendre ?</h2>
         </div>
+
+        <a href="deconnexion.php">
+            <button>
+                <p>Déconnexion</p>
+                <div class="deco_icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </button>
+        </a>
 
         <div class="image-container">
             <img src="./images/carte.jpg" alt="" class="responsive-image">
@@ -86,26 +87,13 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
         <p>Mes Bannières</p>
         <div class="banniere">
             <?php 
-            
                 foreach ($defBanner as $defis) {
                     echo "<img class='select-banner' src=" . $defis['Lien image'] ." alt= " . $defis['Intitule item'] . ">";
                 }
-
             ?>
-            <!-- <img class="select-banner" src="./images/banner1.avif" alt="">
-            <img class="select-banner" src="./images/banner2.avif" alt="">
-            <img class="select-banner" src="./images/banner3.avif" alt="">
-            <img class="select-banner" src="./images/banner1.avif" alt=""> -->
         </div>
         <p>Avatar</p>
         <div class="avatar">
-            <!-- <img class="select-avatar" src="./images/avatar1.webp" alt="">
-            <img class="select-avatar" src="./images/avatar2.jpg" alt="">
-            <img class="select-avatar" src="./images/avatar3.jpg" alt="">
-            <img class="select-avatar" src="./images/avatar1.webp" alt="">
-            <img class="select-avatar" src="./images/avatar1.webp" alt="">
-            <img class="select-avatar" src="./images/avatar2.jpg" alt=""> -->
-            
             <?php 
                 foreach ($defAvatar as $defis) {
                     echo "<img class='select-avatar' src=" . $defis['Lien image'] ." alt= " . $defis['Intitule item'] . ">";
@@ -117,80 +105,160 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="banner">
         <div class="bg-banner">
-            <img id="affichage-banner" src="./images/banner1.avif" alt="">
+            <img id="affichage-banner" src="./images/items/ban2.jpg" alt="">
         </div>
         <div class="banner-container">
-            <h1>Nom Prénom</h1>
-            <div class="photo"><img id="affichage-avatar" src="./images/avatar1.webp" alt=""></div>
-            <div class="pseudo">@pseudo / [Grade]</div>
+            <h1><?php echo $nom ?></h1>
+            <div class="photo"><img id="affichage-avatar" src="./images/items/pp1.png" alt=""></div>
+            <div class="pseudo"><?php echo "@" . $pseudo?> / [Grade]</div>
         </div>
     </div>
+
+    
 
     <div class="container">
         <div class="defi-info">
             <h2>Défis</h2>
-            <div class="box" id="box">
-                <div class="icon">
-                    <div class="box icon-container">
-                        <i class="fa-solid fa-bicycle"></i>
-                    </div>
-                </div>
-                <div class="description">
-                    <h3>Défis 1 | Moyen</h3>
-                    <p>Parcourir 20km en vélos dans une journée.</p>
-                    <div class="progress-bar__wrapper">
-                        <label class="progress-bar__value" htmlFor="progress-bar"> 90% </label>
-                        <progress id="progress-bar" value="90" max="100"><progress>
-                    </div>
-                </div>
-            </div>
 
-            <div class="box" id="box">
-                <div class="icon">
-                    <div class="box icon-container">
-                        <i class="fa-solid fa-lemon"></i>
-                    </div>
-                </div>
-                <div class="description">
-                    <h3>Défis 1 | Facile</h3>
-                    <p>Manger 3 fruits</p>
+            <?php 
+
+                $sql_select_defis = "SELECT DISTINCT defis_quotidiens.*, defis.*, realisation.Statut FROM defis_quotidiens 
+                INNER JOIN defis ON defis_quotidiens.defi_id1 = defis.Id_defis 
+                                OR defis_quotidiens.defi_id2 = defis.Id_defis 
+                                OR defis_quotidiens.defi_id3 = defis.Id_defis 
+                LEFT JOIN realisation ON realisation.user_Id = defis_quotidiens.user_id 
+                AND (realisation.defis_Id = defis_quotidiens.defi_id1 
+                                OR realisation.defis_Id = defis_quotidiens.defi_id2 
+                                OR realisation.defis_Id = defis_quotidiens.defi_id3) 
+                WHERE defis_quotidiens.user_id = $id_num;";
+                                                    
+                $result_select_defis = $db->prepare($sql_select_defis);
+                $result_select_defis->execute();
+                $defis_quotidiens = $result_select_defis->fetchAll(PDO::FETCH_ASSOC);
+
+
+                foreach ($defis_quotidiens as $defi_quotidien) {
+                    $id_defis_quotidiens = $defi_quotidien['Id_defis'];
+                    $difficulte_defi = $defi_quotidien['Difficulte'];
                     
-                    <div class="progress-bar__wrapper">
-                        <!-- remplacer le 40% par le pourcentage d'avancement dans la BDD -->
-                        <label class="progress-bar__value" htmlFor="progress-bar"> 50% </label>
-                        <!-- Remplacer le '40' de l'attribut'value' par une balise php avec le pourcentage d'avancement -->
-                        <progress id="progress-bar" value="50" max="100"><progress>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="box" id="box">
-                <div class="icon">
-                    <div class="box icon-container">
-                        <i class="fa-solid fa-leaf"></i>
-                    </div>
-                </div>
-                <div class="description">
-                    <h3>Défis 1 | Difficile</h3>
-                    <p>Faire un voyage en Afrique et planter 32 arbres.</p>
+                    $intitule=$defi_quotidien['Intitule defis'];
+
+                    $sql_statut="SELECT * FROM realisation WHERE user_id=$id_num AND defis_id=$id_defis_quotidiens";
+
+                    $result_select_statut = $db->prepare($sql_statut);
+                    $result_select_statut->execute();
+                    $defis_statut = $result_select_statut->fetchAll(PDO::FETCH_ASSOC);
+
+
+                    //$statut=$defi_quotidien['Statut'];
+                
+                    echo "
+                        <div class='box' id='box'>
+                            <div class='icon'>
+                                <div class='box icon-container'>
+                                    <i class='fa-solid fa-bicycle'></i>
+                                </div>
+                            </div>
+
+                            <div class='description'>
+                                <h3>Défi $difficulte_defi</h3>
+                                <p>$intitule</p>";
                     
-                    <div class="progress-bar__wrapper">
-                        <label class="progress-bar__value" htmlFor="progress-bar"> 30% </label>
-                        <progress id="progress-bar" value="30" max="100"><progress>
-                    </div>
-                </div>
-            </div>
-
-
+                        if (count($defis_statut)!=0) {
+                        echo "
+                            <h6> 
+                                Défi complété
+                            </h6>
+                            ";
+                    }
+                    else {
+                        echo "
+                            <h6>
+                                Défis en cours  
+                            </h6>
+                        ";
+                    }
+                        
+                    echo "
+                            </div>
+                        </div>";
+                }
+            ?>
         </div>
     
         <div class="separator" id="separator"></div>
     
         <div class="donnees-infos">
-            <h2>Mes données</h2>
-            <div class="donnees-container">
-                <div class="top-donnees"></div>
-                <div class="bot-donnees"></div>
+            <h2>Classement</h2>
+            <div class="classement">
+                <table>
+                    <tr>
+                        <th>Numéro</th>
+                        <th>Pseudo</th>
+                        <th>Grade</th>
+                        <th>Total Score</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>John</td>
+                        <td>Gold</td>
+                        <td>5000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane</td>
+                        <td>Silver</td>
+                        <td>4500</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Robert</td>
+                        <td>Platinum</td>
+                        <td>6000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Alice</td>
+                        <td>Gold</td>
+                        <td>5500</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>John</td>
+                        <td>Gold</td>
+                        <td>5000</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Jane</td>
+                        <td>Silver</td>
+                        <td>4500</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Robert</td>
+                        <td>Platinum</td>
+                        <td>6000</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Alice</td>
+                        <td>Gold</td>
+                        <td>5500</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Robert</td>
+                        <td>Platinum</td>
+                        <td>6000</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Alice</td>
+                        <td>Gold</td>
+                        <td>5500</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

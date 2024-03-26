@@ -28,12 +28,10 @@ p {
 .bg-background {
     min-height: 100vh;
     max-width: 100vw;
-    /* background-image: url(../images/ban1.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
     background-color: #98CE94;
 }
+
+
 
 .container {
     position: absolute;
@@ -45,23 +43,13 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 8vh;
 }
 
-.photo {
-    width: 7.7vw;
-    height: 16vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(217, 217, 217, 0.7);
-    border-radius: 100%;
-    margin: 50px 0;
-    box-shadow: 3px 4px 5px 0px #666666;
-
-}
-
-.photo i {
-    font-size: 60px;
+.container .logo {
+    /* width: 100%; */
+    margin-bottom: 150px;
+    transform: scale(4);
 }
 
 form {
@@ -110,7 +98,7 @@ input {
 .register-btn {
     background-color: #098815;
     color: white;
-    border: 1px solid black;
+    border: 2px solid white;
     transition: 0.3s ease;
 }
 
@@ -121,13 +109,15 @@ input {
 }
 
 .connect-btn {
-    background-color: rgb(255, 255, 255, 0.8);
-    border: 1px solid black;
+    background-color: #BDE3FF;
+    border: 2px solid #384955;
     transition: 0.3s ease;
+    color: black;
 }
 
 .connect-btn:hover {
-    background-color: black;
+    background-color: #384955;
+    border: 1px solid #BDE3FF;
     color: white;
     transform: scale(1.1);
 }

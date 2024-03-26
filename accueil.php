@@ -59,6 +59,15 @@ if ($tmpFile !== false) {
         <h1>Bienvenue, <?php echo $identifiant ?></h1>
     </div>
 
+    <a href="deconnexion.php">
+        <button>
+            <p>Déconnexion</p>
+            <div class="deco_icon">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+        </button>
+    </a>
+
     <div class="container">
         <img src="./images/carte.jpg" alt="" class="responsive-image">
     </div>
