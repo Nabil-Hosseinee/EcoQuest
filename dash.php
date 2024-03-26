@@ -1,3 +1,7 @@
+<?php
+include('grade.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,31 +64,90 @@
                 <img src="./images/avatar3.jpg" alt="">
             </div>
             <div class="info-test">
-                <h3>Dydy</h3>
-                <p>Grade</p>
+                <?php
+
+                if(isset($_SESSION['id_number'])) {
+                    include('connect_bdd.php');
+
+                    $user_id = $_SESSION['id_number']; 
+
+                    $sql_user_info = "SELECT Pseudo, Grade FROM user WHERE Id_user = :user_id";
+                    $stmt = $db->prepare($sql_user_info);
+                    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                    $stmt->execute();
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $pseudo = $row['Pseudo'];
+                    $grade = $row['Grade'];
+
+                    echo "<h3>$pseudo</h3>";
+                    echo "<p>$grade</p>";
+                } else {
+                    echo "Session utilisateur non trouvée. Veuillez vous connecter.";
+                }
+                ?>
             </div>
         </div>
 
     </header>
 
     <section class="container">
-        <div class="chiffre">
-            <div class="box">
-                <h4>233</h4>
-                <p>Défis réalisé</p>
-            </div>
-            <div class="separator"></div>
-            <div class="box">
-                <h4>666</h4>
-                <p>Défis réalisé</p>
-            </div>
-            <div class="separator"></div>
-            <div class="box">
-                <h4>123</h4>
-                <p>Daronne à baiser</p>
-            </div>
-        </div>
-    </section>
+    <div class="chiffre">
+        <?php
+        if(isset($_SESSION['id_number'])) {
+            include('connect_bdd.php');
+
+            $user_id = $_SESSION['id_number']; 
+
+            // Défis réalisés
+            $sql_count_realisations = "SELECT COUNT(*) AS total_realisations FROM realisation WHERE user_Id = :user_id";
+            $stmt = $db->prepare($sql_count_realisations);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $total_realisations = $row['total_realisations'];
+
+            // Moyenne impact des défis réalisés
+            $sql_avg_impact = "SELECT AVG(defis.Impact) FROM realisation JOIN defis ON realisation.defis_Id = defis.Id_defis WHERE realisation.user_Id = :user_id";
+            $stmt_avg_impact = $db->prepare($sql_avg_impact);
+            $stmt_avg_impact->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt_avg_impact->execute();
+            $avg_impact = $stmt_avg_impact->fetchColumn(); // Récupère directement la moyenne de la première colonne
+            
+            // Total Score
+            $sql_total_score = "SELECT `Total score` FROM user WHERE Id_user = :user_id";
+            $stmt_total_score = $db->prepare($sql_total_score);
+            $stmt_total_score->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt_total_score->execute();
+            $total_score = $stmt_total_score->fetchColumn();
+
+            // Défis réalisés
+            echo '<div class="box">';
+            echo '<h4>' . $total_realisations . '</h4>';
+            echo '<p>Défis réalisés</p>';
+            echo '</div>';
+
+            // Moyenne impact des défis réalisés
+            echo '<div class="separator"></div>';
+            echo '<div class="box">';
+            echo '<h4>' . round($avg_impact, 2) . '</h4>'; // Arrondi à deux décimales
+            echo '<p>Moyenne impact des défis réalisés</p>';
+            echo '</div>';
+
+            // Total Score
+            echo '<div class="separator"></div>';
+            echo '<div class="box">';
+            echo '<h4>' . $total_score . '</h4>';
+            echo '<p>Points de grade</p>';
+            echo '</div>';
+        } else {
+            echo "Session utilisateur non trouvée. Veuillez vous connecter.";
+        }
+        ?>
+    </div>
+</section>
+
+
+
 
     <section class="graphique">
         <div class="chart" id="piechart" style="width: 900px; height: 500px;"></div>
