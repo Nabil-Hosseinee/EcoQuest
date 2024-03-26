@@ -31,7 +31,7 @@ $id_num = $_SESSION['id_number'];
         </div>
     
         <div class="point defis_point" data-text="Défis">
-            <a href="defis.html"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="defis.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point profil_point" data-text="Profil">
@@ -71,12 +71,15 @@ $id_num = $_SESSION['id_number'];
         <div class="right">
             <?php
                 include('connect_bdd.php');
-                $sql_select_defis = "SELECT defis.*, defis_quotidiens.defi_id1, defis_quotidiens.defi_id2, defis_quotidiens.defi_id3, defis_quotidiens.Id_defis_quotidiens
-                                    FROM defis_quotidiens 
-                                    INNER JOIN defis ON defis_quotidiens.defi_id1 = defis.Id_defis 
-                                                    OR defis_quotidiens.defi_id2 = defis.Id_defis 
-                                                    OR defis_quotidiens.defi_id3 = defis.Id_defis
-                                    WHERE user_id = $id_num";
+                $sql_select_defis = "SELECT DISTINCT defis_quotidiens.*, defis.*, realisation.Statut FROM defis_quotidiens 
+                INNER JOIN defis ON defis_quotidiens.defi_id1 = defis.Id_defis 
+                                 OR defis_quotidiens.defi_id2 = defis.Id_defis 
+                                 OR defis_quotidiens.defi_id3 = defis.Id_defis 
+                LEFT JOIN realisation ON realisation.user_Id = defis_quotidiens.user_id 
+                AND (realisation.defis_Id = defis_quotidiens.defi_id1 
+                                 OR realisation.defis_Id = defis_quotidiens.defi_id2 
+                                 OR realisation.defis_Id = defis_quotidiens.defi_id3) 
+                WHERE defis_quotidiens.user_id = $id_num;";
                                                     
                 $result_select_defis = $db->prepare($sql_select_defis);
                 $result_select_defis->execute();
@@ -84,23 +87,18 @@ $id_num = $_SESSION['id_number'];
 
                 foreach ($defis_quotidiens as $defi_quotidien) {
                     $id_defis_quotidiens = $defi_quotidien['Id_defis'];
-                    $difficulte_defi = "";
-                    switch ($defi_quotidien["Difficulte"]) {
-                        case 0:
-                            $difficulte_defi = "facile";
-                            break;
-                        case 1:
-                            $difficulte_defi = "moyen";
-                            break;
-                        case 2:
-                            $difficulte_defi = "difficile";
-                            break;
-                        default:
-                            $difficulte_defi = "Inconnu";
-                    }
+                    $difficulte_defi = $defi_quotidien['Difficulte'];
                     
                     $intitule=$defi_quotidien['Intitule defis'];
-                    $status=$defi_quotidien['Status'];
+
+                    $sql_statut="SELECT * FROM realisation WHERE user_id=$id_num AND defis_id=$id_defis_quotidiens";
+
+                    $result_select_statut = $db->prepare($sql_statut);
+                    $result_select_statut->execute();
+                    $defis_statut = $result_select_statut->fetchAll(PDO::FETCH_ASSOC);
+
+
+                    //$statut=$defi_quotidien['Statut'];
                 
                     echo "
                         <div class='box' id='box'>
@@ -112,7 +110,7 @@ $id_num = $_SESSION['id_number'];
                                 <h3>Défi $difficulte_defi</h3>
                                 <p>$intitule</p>";
                     
-                        if ($status==2) {
+                        if (count($defis_statut)!=0) {
                         echo "
                             <h6> 
                                 Défi complété
@@ -121,10 +119,12 @@ $id_num = $_SESSION['id_number'];
                     }
                     else {
                         echo "
-                            <form action='defi_realise.php' method='post' id='$id_defis_quotidiens'>
-                                <input type='hidden' name='defi_id' value='$id_defis_quotidiens' form='$id_defis_quotidiens'>
-                                <button type='submit' name='complete_defi' form='$id_defis_quotidiens'>Compléter le défi</button>
-                            </form>
+                        <div class='submit-container'>
+                        <form action='defi_realise.php' method='post' id='$id_defis_quotidiens'>
+                            <input type='hidden' name='defi_id' value='$id_defis_quotidiens' form='$id_defis_quotidiens'>
+                            <button type='submit' name='complete_defi' class='btn register-btn' form='$id_defis_quotidiens'>Compléter le défi</button>
+                        </form>
+                    </div>
                             ";
                     }
                         
@@ -156,20 +156,7 @@ $id_num = $_SESSION['id_number'];
                 $defis = $result_select_defis->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($defis as $defi) {
-                    $difficulte_defi = "";
-                    switch ($defi["Difficulte"]) {
-                        case 0:
-                            $difficulte_defi = "Facile";
-                            break;
-                        case 1:
-                            $difficulte_defi = "Moyen";
-                            break;
-                        case 2:
-                            $difficulte_defi = "Difficile";
-                            break;
-                        default:
-                            $difficulte_defi = "Inconnu";
-                    }
+                    $difficulte_defi = $defi["Difficulte"];
 
                     $intitule = $defi["Intitule defis"];
 

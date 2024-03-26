@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 19 mars 2024 à 13:55
+-- Généré le : mar. 26 mars 2024 à 19:02
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.0.30
 
@@ -46,23 +46,53 @@ CREATE TABLE `defis` (
   `Intitule defis` varchar(200) NOT NULL,
   `Difficulte` varchar(50) NOT NULL COMMENT '0:Facile\r\n1:Moyen\r\n2:Difficile',
   `Score` int(11) NOT NULL,
-  `Status` tinyint(4) NOT NULL COMMENT '0:Etat initial\r\n1:En cours\r\n2:Résolu\r\n3:Sélectionné',
   `Argent gagne` int(11) NOT NULL,
-  `date_expiration` datetime NOT NULL DEFAULT concat(curdate(),' 23:59:59'),
-  `Date_debut` date NOT NULL DEFAULT (curdate() + interval 7 - dayofweek(curdate()) day)
+  `Impact` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `defis`
 --
 
-INSERT INTO `defis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Status`, `Argent gagne`, `date_expiration`, `Date_debut`) VALUES
-(2, 'Utilise un sac de courses réutilisable\r\n', '0', 25, 0, 100, '2024-03-01 23:59:59', '2024-03-02'),
-(3, 'Fais un repas végétarien', '1', 50, 2, 250, '2024-03-01 23:59:59', '2024-03-02'),
-(4, 'Fais du covoiturage', '2', 100, 0, 400, '2024-03-01 23:59:59', '2024-03-02'),
-(5, 'Utilise une gourde', '0', 20, 0, 80, '2024-03-01 23:59:59', '2024-03-02'),
-(6, 'Prend les transports en commun au lieu de ta voiture', '1', 45, 0, 200, '2024-03-01 23:59:59', '2024-03-02'),
-(7, 'Répare un objet', '2', 90, 2, 350, '2024-03-01 23:59:59', '2024-03-02');
+INSERT INTO `defis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Argent gagne`, `Impact`) VALUES
+(8, 'Utilise un sac de courses réutilisable pour tous tes achats.', 'Facile', 25, 50, 50),
+(9, 'Achète au moins trois produits d\'une marque écologique ou éthique.', 'Facile', 25, 50, 50),
+(10, 'Achète uniquement des produits locaux et de saison pour tous tes repas de la journée.', 'Facile', 30, 60, 60),
+(11, 'Mange un produit provenant d’un rayon anti-gaspi d’un supermarché.', 'Facile', 20, 40, 40),
+(12, 'Bois uniquement de l’eau du robinet et non en bouteille.', 'Facile', 20, 40, 40),
+(13, 'Utilise une gourde ou une tasse réutilisable.', 'Facile', 20, 40, 40),
+(14, 'Sèche ton linge à l’air libre.', 'Facile', 20, 40, 40),
+(15, 'Remplace au moins un produit jetable par une alternative réutilisable.', 'Facile', 25, 50, 50),
+(16, 'Donne ou vends au moins un article inutilisé ou non désiré.', 'Facile', 25, 50, 50),
+(17, 'Achète un produit seconde main.', 'Facile', 25, 50, 50),
+(18, 'Rapporte une boîte de médicaments périmés à la pharmacie.', 'Facile', 20, 40, 40),
+(19, 'Sensibilise une personne de ton entourage sur les actions à entreprendre pour réduire son empreinte carbone.', 'Facile', 25, 50, 50),
+(20, 'Réalise tes achats sans aucun emballage plastique.', 'Moyen', 35, 70, 70),
+(21, 'Prépare et consomme un repas végétalien.', 'Moyen', 40, 80, 80),
+(22, 'Prépare et consomme un repas végétarien.', 'Moyen', 40, 80, 80),
+(23, 'Évite les aliments transformés et cuisine uniquement des produits frais.', 'Moyen', 35, 70, 70),
+(24, 'Estime et réduis le gaspillage alimentaire pour la journée.', 'Moyen', 35, 70, 70),
+(25, 'Utilise uniquement des modes de transport écologiques (vélo, transports en commun, marche) pour tous tes déplacements.', 'Moyen', 40, 80, 80),
+(26, 'Planifie une journée sans voiture et utilise exclusivement les transports en commun ou la marche.', 'Moyen', 40, 80, 80),
+(27, 'Réduis ta vitesse de conduite de 10 km/h par rapport à ta vitesse habituelle pour économiser du carburant.', 'Moyen', 35, 70, 70),
+(28, 'Opte pour le télétravail ou des réunions virtuelles plutôt que des déplacements physiques pour la journée.', 'Moyen', 35, 70, 70),
+(29, 'Opte pour le covoiturage ou le partage de véhicules pour tous tes trajets de la journée.', 'Moyen', 40, 80, 80),
+(30, 'Utilise uniquement des produits de nettoyage écologiques pour toutes les tâches ménagères.', 'Moyen', 35, 70, 70),
+(31, 'Éteins tous les appareils électroniques non essentiels pendant toute la journée.', 'Moyen', 35, 70, 70),
+(32, 'Réduis ta consommation d\'eau pour la journée en prenant des douches plus courtes et en limitant l\'utilisation de l\'eau courante.', 'Moyen', 35, 70, 70),
+(33, 'Privilégie la douche au bain.', 'Moyen', 35, 70, 70),
+(34, 'Utilise des ampoules à faible consommation.', 'Moyen', 35, 70, 70),
+(35, 'Mets les chauffages en dessous de 20 degrés.', 'Moyen', 35, 70, 70),
+(36, 'Trouve et achète un produit de seconde main dans un magasin de seconde main ou sur une plateforme en ligne.', 'Difficile', 50, 100, 100),
+(37, 'Réduis la consommation de viande et opte pour des alternatives végétales pour tous les repas de la journée.', 'Difficile', 45, 95, 95),
+(38, 'Récupère les invendus', 'Difficile', 45, 95, 95),
+(39, 'Plante un arbre ou une plante indigène dans ton jardin ou sur ton balcon.', 'Difficile', 50, 100, 100),
+(40, 'Crée un espace de jardinage écologique ou un potager sur ton balcon.', 'Difficile', 50, 100, 100),
+(41, 'Installe un système d\'arrosage économiseur d\'eau ou un récupérateur d\'eau de pluie pour une utilisation dans ton jardin.', 'Difficile', 50, 100, 100),
+(42, 'Récupère l’eau de pluie', 'Difficile', 50, 100, 100),
+(43, 'Organise ou participe à une opération de nettoyage de rue ou de plage dans ta communauté.', 'Difficile', 45, 95, 95),
+(44, 'Participe à un défi écologique en ligne ou rejoins une communauté virtuelle axée sur la durabilité.', 'Difficile', 45, 95, 95),
+(45, 'Implique la famille ou les amis dans un défi écologique pour une journée.', 'Difficile', 50, 100, 100);
 
 -- --------------------------------------------------------
 
@@ -84,8 +114,7 @@ CREATE TABLE `defis_quotidiens` (
 --
 
 INSERT INTO `defis_quotidiens` (`Id_defis_quotidiens`, `user_id`, `date`, `defi_id1`, `defi_id2`, `defi_id3`) VALUES
-(3, 1, '2024-03-19', 7, 3, 2),
-(4, 5, '2024-03-19', 6, 7, 3);
+(5, 1, '2024-03-26', 20, 13, 32);
 
 -- --------------------------------------------------------
 
@@ -124,10 +153,16 @@ CREATE TABLE `realisation` (
   `Id_realisation` int(11) NOT NULL,
   `user_Id` int(11) NOT NULL,
   `defis_Id` int(11) NOT NULL,
-  `Niveau realisation` float NOT NULL,
-  `Date debut` date NOT NULL,
-  `Date fin` date NOT NULL
+  `Statut` tinyint(4) NOT NULL COMMENT '0:Etat initial\r\n1:En cours\r\n2:Résolu\r\n3:Sélectionné'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `realisation`
+--
+
+INSERT INTO `realisation` (`Id_realisation`, `user_Id`, `defis_Id`, `Statut`) VALUES
+(13, 1, 13, 2),
+(14, 1, 20, 2);
 
 -- --------------------------------------------------------
 
@@ -150,7 +185,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`Id_user`, `Identifiant`, `Mot de passe`, `Pseudo`, `Grade`, `Total score`, `Monnaie`) VALUES
-(1, 'dydy@gmail.com', 'a16358be6e2306b153b1f071477e68837266075e', 'Dydy', 'Bandeur de pétrole', 0, 0),
+(1, 'dydy@gmail.com', 'a16358be6e2306b153b1f071477e68837266075e', 'Dydy', 'Bandeur de pétrole', 55, 110),
 (5, 'fefe@gmail.com', '70c881d4a26984ddce795f6f71817c9cf4480e79', 'Félix', '', 0, 0);
 
 --
@@ -222,13 +257,13 @@ ALTER TABLE `acquisition`
 -- AUTO_INCREMENT pour la table `defis`
 --
 ALTER TABLE `defis`
-  MODIFY `Id_defis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id_defis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT pour la table `defis_quotidiens`
 --
 ALTER TABLE `defis_quotidiens`
-  MODIFY `Id_defis_quotidiens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id_defis_quotidiens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `item`
@@ -246,7 +281,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT pour la table `realisation`
 --
 ALTER TABLE `realisation`
-  MODIFY `Id_realisation` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_realisation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `user`

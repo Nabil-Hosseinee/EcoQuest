@@ -48,7 +48,7 @@ if ($tmpFile !== false) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoQuest | accueil</title>
+    <title>EcoQuest | Home</title>
     <link rel="stylesheet" href="./css/accueil.css">
     <link rel="stylesheet" href="./css/general.css">
     <script src="https://kit.fontawesome.com/96e027db6d.js" crossorigin="anonymous"></script>
