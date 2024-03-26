@@ -2,6 +2,7 @@
 session_start();
 $identifiant = $_SESSION['identifiant'];
 $mdp = $_SESSION['mdp'];
+// $id_num = $_SESSION['id_number'];
 
 // echo $identifiant;
 // echo "</br>";

@@ -22,10 +22,37 @@ $users = $userStatement->fetchAll(PDO::FETCH_ASSOC);
 foreach ($users as $user) {
     if (($identifiant == $user['Identifiant'] || $identifiant == $user['Pseudo']) && $mdp == $user['Mot de passe']) {
 
+        // test ajout nab
+        $test = $db->prepare("SELECT * FROM user WHERE Pseudo = :pseudo");
+        $test->bindParam(':pseudo', $identifiant);
+        $test->execute();
+        $result = $test->fetchAll(PDO::FETCH_ASSOC);
+
+        echo '<pre>';
+        var_dump($result);
+        echo '<pre>';
+
+        foreach ($result as $results) {
+            $id_num = $results['Id_user'];
+        }
+
+        $_SESSION['id_number'] = $id_num;
+        echo $id_num;
+        echo "<br>";
+        // fin test nab
+
         $date_actuelle = date('Y-m-d');
 
         $user_id = $user['Id_user']; 
 
+        // Supprimer les anciens défis quotidiens pour cet utilisateur
+        $sql_delete_old_defis = "DELETE FROM defis_quotidiens WHERE date != :date AND user_id = :user_id";
+        $stmt_delete_old_defis = $db->prepare($sql_delete_old_defis);
+        $stmt_delete_old_defis->bindParam(':date', $date_actuelle);
+        $stmt_delete_old_defis->bindParam(':user_id', $user_id);
+        $stmt_delete_old_defis->execute();
+
+        // Vérifier si des défis quotidiens existent déjà pour aujourd'hui
         $sql_select_defis_quotidiens = "SELECT * FROM defis_quotidiens WHERE date = :date AND user_id= :user_id";
         $stmt_select_defis_quotidiens = $db->prepare($sql_select_defis_quotidiens);
         $stmt_select_defis_quotidiens->bindParam(':date', $date_actuelle);

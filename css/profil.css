@@ -8,6 +8,10 @@ body {
     overflow: hidden;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
 /* hamburger */
 #burger-menu {
     position: absolute;
@@ -412,18 +416,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70%;
+  width: 80%;
   height: 15vh;
-  color: white;
   /* font-family: 'Raleway'; */
   font-size: 2.5rem;
   margin: 40px auto;
 }
 .box {
   --borderWidth: 3px;
-  /* background: #1D1F20; */
+  background: #92fcad;
   position: relative;
   border-radius: var(--borderWidth);
+  margin: 40px 0;
+  padding: 20px 0;
+  color: #421800;
 }
 .box:after {
   content: '';
@@ -462,18 +468,15 @@ body {
 }
 
 .box h3 {
-  color: white;
-  font-size: 20px;
-  margin: 10px 0;
+  font-size: 25px;
 }
 
 .box p {
   font-size: 16px;
-  margin: 0;
 }
 
 .icon {
-  width: 25%;
+  width: 30%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -482,27 +485,40 @@ body {
 
 .icon-container {
   background-color: rgba(66, 66, 66, 0.5);
-  width: 50%;
-  height: 50%;
+  width: 4vw;
+  height: 8vh;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  border: 1px solid white;
+  border: 1px solid #421800;
+  font-size: 30px;
 }
 
 .description {
   width: 70%;
   height: 100%;
-  padding: 10px 20px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
+}
+
+.description h3 {
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.description p {
+  font-size: 18px;
+  margin-bottom: 15px;
 }
 
 
 /* animation barre de progression */
 .progress-bar__wrapper {
   position: relative;
+  display: flex;
 }
 .progress-bar__value {
   position: absolute;
@@ -510,7 +526,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  top: 72%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 16px;

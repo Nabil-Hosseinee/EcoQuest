@@ -1,3 +1,8 @@
+<?php
+session_start();
+$id_num = $_SESSION['id_number'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +35,7 @@
         </div>
     
         <div class="point profil_point" data-text="Profil">
-            <a href="profil.html"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="profil.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point reseau_point" data-text="Réseau">
@@ -38,7 +43,7 @@
         </div>
     
         <div class="point dashboard_point" data-text="Dashboard">
-            <a href=""><i class="fa-solid fa-location-dot"></i></a>
+            <a href="dash.html"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point shop_point" data-text="Boutique">
@@ -66,12 +71,13 @@
         <div class="right">
             <?php
                 include('connect_bdd.php');
-
                 $sql_select_defis = "SELECT defis.*, defis_quotidiens.defi_id1, defis_quotidiens.defi_id2, defis_quotidiens.defi_id3, defis_quotidiens.Id_defis_quotidiens
                                     FROM defis_quotidiens 
                                     INNER JOIN defis ON defis_quotidiens.defi_id1 = defis.Id_defis 
                                                     OR defis_quotidiens.defi_id2 = defis.Id_defis 
-                                                    OR defis_quotidiens.defi_id3 = defis.Id_defis";
+                                                    OR defis_quotidiens.defi_id3 = defis.Id_defis
+                                    WHERE user_id = $id_num";
+                                                    
                 $result_select_defis = $db->prepare($sql_select_defis);
                 $result_select_defis->execute();
                 $defis_quotidiens = $result_select_defis->fetchAll(PDO::FETCH_ASSOC);
@@ -96,25 +102,34 @@
                     $intitule=$defi_quotidien['Intitule defis'];
                     $status=$defi_quotidien['Status'];
                 
-                    echo "<div class='box'>
-                        <div class='icon-container'>
-                        <i class='fa-solid fa-bicycle'></i>
-                        </div>
-                        <div class='description'>
-                        <h3>Défi $difficulte_defi</h3>
-                        <p>$intitule</p>";
+                    echo "
+                        <div class='box' id='box'>
+                            <div class='icon-container'>
+                                <i class='fa-solid fa-bicycle'></i>
+                            </div>
+
+                            <div class='description'>
+                                <h3>Défi $difficulte_defi</h3>
+                                <p>$intitule</p>";
                     
                         if ($status==2) {
-                        echo "Défi complété";
+                        echo "
+                            <h6> 
+                                Défi complété
+                            </h6>
+                            ";
                     }
                     else {
-                        echo "<form action='defi_realise.php' method='post' id='$id_defis_quotidiens'>
-                        <input type='hidden' name='defi_id' value='$id_defis_quotidiens' form='$id_defis_quotidiens'>
-                        <button type='submit' name='complete_defi' form='$id_defis_quotidiens'>Compléter le défi</button>
-                        </form>";
+                        echo "
+                            <form action='defi_realise.php' method='post' id='$id_defis_quotidiens'>
+                                <input type='hidden' name='defi_id' value='$id_defis_quotidiens' form='$id_defis_quotidiens'>
+                                <button type='submit' name='complete_defi' form='$id_defis_quotidiens'>Compléter le défi</button>
+                            </form>
+                            ";
                     }
                         
-                    echo "</div>
+                    echo "
+                            </div>
                         </div>";
                 }
             ?>
@@ -125,10 +140,10 @@
         <h2>Liste de tous les défis</h2>
 
         <ul class="defis-filtre">
-            <li class="list defis-filtre-active" data-filter="all">Tout</li>
-            <li class="list" data-filter="facile">Facile</li>
-            <li class="list" data-filter="moyen">Moyen</li>
-            <li class="list" data-filter="difficile">Difficile</li>
+            <li class="list defis-filtre-active" data-filter="All">Tout</li>
+            <li class="list" data-filter="Facile">Facile</li>
+            <li class="list" data-filter="Moyen">Moyen</li>
+            <li class="list" data-filter="Difficile">Difficile</li>
         </ul>
 
         <div class="defis-container">
@@ -144,28 +159,47 @@
                     $difficulte_defi = "";
                     switch ($defi["Difficulte"]) {
                         case 0:
-                            $difficulte_defi = "facile";
+                            $difficulte_defi = "Facile";
                             break;
                         case 1:
-                            $difficulte_defi = "moyen";
+                            $difficulte_defi = "Moyen";
                             break;
                         case 2:
-                            $difficulte_defi = "difficile";
+                            $difficulte_defi = "Difficile";
                             break;
                         default:
                             $difficulte_defi = "Inconnu";
                     }
 
-                    echo '<div class="box all-box ' . $difficulte_defi . '">' .
-                        '<div class="icon all-icon">' .
-                        '<div class="box icon-container">';
-                    echo '</div>' .
-                        '</div>' .
-                        '<div class="description">' .
-                        '<h3>Défi ' . ucfirst($difficulte_defi) . '</h3>' . 
-                        '<p>' . $defi["Intitule defis"] . '</p>' .
-                        '</div>' .
-                        '</div>';
+                    $intitule = $defi["Intitule defis"];
+
+                    // echo '<div class="box all-box ' . $difficulte_defi . '">' .
+                    //     '<div class="icon all-icon">' .
+                    //     '<div class="box icon-container">';
+                    // echo '</div>' .
+                    //     '</div>' .
+                    //     '<div class="description">' .
+                    //     '<h3>Défi ' . ucfirst($difficulte_defi) . '</h3>' . 
+                    //     '<p>' . $defi["Intitule defis"] . '</p>' .
+                    //     '</div>' .
+                    //     '</div>';
+
+                    echo "
+                        <div class = 'all-box $difficulte_defi'>
+
+                            <div class = 'all-icon'>
+                                <div class = 'icon-container'>
+                                    <i class='fa-solid fa-bicycle'></i>
+                                </div>
+                            </div>
+
+                            <div class = 'all-description'>
+                                <h3>Défi $difficulte_defi</h3>
+                                <p>$intitule</p>
+                            </div>
+
+                        </div>
+                    ";
                 }
             ?>
         </div>
@@ -194,7 +228,7 @@
         $(document).ready(function() {
             $('.list').click(function() {
                 const value = $(this).attr('data-filter');
-                if (value == 'all') {
+                if (value == 'All') {
                     $('.all-box').show('1000')
                 }
                 else {
