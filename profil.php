@@ -52,6 +52,15 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
             <h2>Où voulez vous vous rendre ?</h2>
         </div>
 
+        <a href="deconnexion.php">
+            <button>
+                <p>Déconnexion</p>
+                <div class="deco_icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </button>
+        </a>
+
         <div class="image-container">
             <img src="./images/carte.jpg" alt="" class="responsive-image">
         </div>
