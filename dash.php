@@ -1,6 +1,5 @@
 <?php
-session_start();
-$id_num = $_SESSION['id_number'];
+include('grade.php');
 ?>
 
 <!DOCTYPE html>
