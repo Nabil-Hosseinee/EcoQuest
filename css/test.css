@@ -9,30 +9,35 @@ body{
     width: 100px;
     height: 100px;
 }
+
 .graph2{
     background-color: rgb(167, 125, 213);
     float: left;
     width: 100px;
     height: 100px;
 }
+
 .graph3{
     background-color: rgb(141, 159, 214);
     float: left;
     width: 100px;
     height: 100px;
 }
+
 .graph4{
     background-color: rgb(148, 221, 173);
     float: left;
     width: 100px;
     height: 100px;
 }
+
 .graph5{
     background-color: rgb(215, 222, 113);
     float: left;
     width: 100px;
     height: 100px;
 }
+
 .graph6{
     background-color: rgb(227, 105, 105);
     float: left;
