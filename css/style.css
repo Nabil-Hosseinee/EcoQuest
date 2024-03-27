@@ -30,9 +30,9 @@ p {
     width: 100vw;
     /* background-color: #98CE94; */
     background-image: url(../images/items/ban5.png);
-    background-size: cover; /* ou background-size: contain; */
-    background-position: center; /* pour centrer l'image */
-    background-repeat: no-repeat; /* pour éviter la répétition de l'image */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
 
 
