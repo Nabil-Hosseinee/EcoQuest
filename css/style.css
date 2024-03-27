@@ -8,7 +8,7 @@ body {
 
 a {
     text-decoration: none;
-    color: white;
+    color: black;
     transition: 0.2s;
     margin-bottom: 50px;
     margin-top: 10px;
@@ -26,10 +26,15 @@ p {
 }
 
 .bg-background {
-    min-height: 100vh;
-    max-width: 100vw;
-    background-color: #98CE94;
+    height: 100vh;
+    width: 100vw;
+    /* background-color: #98CE94; */
+    background-image: url(../images/items/ban5.png);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
+
 
 
 
@@ -126,6 +131,10 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.other p {
+    color: black;
 }
 
 .other-container {

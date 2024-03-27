@@ -23,11 +23,11 @@ include('grade.php');
     <div id="menu">
 
         <div class="info">
-            <h2>Où voulez vous vous rendre ?</h2>
+            <h2>Où veux-tu te rendre ?</h2>
         </div>
 
         <div class="image-container">
-            <img src="./images/carte.jpg" alt="" class="responsive-image">
+            <img src="./images/carte-fefe4.png" alt="" class="background-image">
         </div>
     
         <div class="point defis_point" data-text="Défis">
@@ -39,7 +39,7 @@ include('grade.php');
         </div>
     
         <div class="point reseau_point" data-text="Réseau">
-            <a href="post.php"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="reseau.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point dashboard_point" data-text="Dashboard">

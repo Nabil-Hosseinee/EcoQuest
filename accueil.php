@@ -69,7 +69,7 @@ if ($tmpFile !== false) {
     </a>
 
     <div class="container">
-        <img src="./images/carte.jpg" alt="" class="responsive-image">
+        <img src="./images/carte-fefe4.png" alt="" class="background-image">
     </div>
 
     <div class="point defis_point" data-text="Défis">
@@ -81,7 +81,7 @@ if ($tmpFile !== false) {
     </div>
 
     <div class="point reseau_point" data-text="Réseau">
-        <a href="test.html"><i class="fa-solid fa-location-dot"></i></a>
+        <a href="reseau.php"><i class="fa-solid fa-location-dot"></i></a>
     </div>
 
     <div class="point dashboard_point" data-text="Dashboard">

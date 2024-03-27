@@ -1,17 +1,18 @@
 body {
-    min-height: 100vh;
+    height: auto;
     overflow: hidden;
     font-family: "Jua", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 
+
 .info {
     width: 50vw;
-    height: 15vh;
+    height: 12vh;
     background-color: rgb(255, 107, 132, 0.5);
     position: absolute;
-    top: 10vh;
+    top: 5vh;
     left: 28vw;
     display: flex;
     justify-content: center;
@@ -23,7 +24,7 @@ body {
 }
 
 .info h1 {
-    font-size: clamp(5px, 5vw, 50px);
+    font-size: clamp(5px, 5vw, 40px);
 }
 
 button {
@@ -36,17 +37,21 @@ button {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #BDE3FF;
-    border: 2px solid #384955;
+    background-color: #ffb6c1;
+    border: 2px solid black;
     transition: 0.3s ease;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #384955;
-    border: 1px solid #BDE3FF;
+    background-color: rgb(255, 107, 132);
+    border: 1px solid white;
     transform: scale(1.1);
     color: white;
+}
+
+button p {
+    font-family: "Jua", sans-serif;
 }
 
 button i {
@@ -54,11 +59,25 @@ button i {
 }
 
 .container {
-    width: 100%; /* Assure que le conteneur prend la largeur complète de son parent */
-    max-width: 100vw; /* Vous pouvez ajuster cette valeur selon vos besoins */
-    min-height: 100vh;
-    margin: 0 auto; /* Centre le conteneur horizontalement */
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    z-index: -1;
 }
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain ;
+    z-index: -1;
+}
+
 
 .responsive-image {
     width: 100%; /* L'image occupe 100% de la largeur de son conteneur */
@@ -81,41 +100,41 @@ button i {
     animation-play-state: paused;
 }
 
-.reseau_point {
+.profil_point {
     position: absolute;
-    top: 43vh;
-    left: 48vw;
+    top: 45vh;
+    left: 49vw;
     animation: float 2s infinite;
 }
 
 .shop_point {
     position: absolute;
-    top: 65vh;
-    left: 73vw;
+    top: 68.5vh;
+    left: 50.5vw;
     animation: float 2s infinite;
     animation-delay: 0.5s;
 }
 
 .defis_point {
     position: absolute;
-    top: 75vh;
-    left: 35vw;
+    top: 20vh;
+    left: 41.5vw;
     animation: float 2s infinite;
     animation-delay: 1s;
 }
 
-.profil_point {
+.reseau_point {
     position: absolute;
-    top: 37vh;
-    left: 27vw;
+    top: 59.5vh;
+    left: 40.5vw;
     animation: float 2s infinite;
     animation-delay: 1.5s;
 }
 
 .dashboard_point {
     position: absolute;
-    top: 33vh;
-    left: 68vw;
+    top: 31vh;
+    left: 61.5vw;
     animation: float 2s infinite;
     animation-delay: 2s;
 }
