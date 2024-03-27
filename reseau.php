@@ -134,20 +134,45 @@ $posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
 
     </div>
 
-    <section id="add-post">
-        <h2>Ajouter un post</h2>
-        <form action="reseau_back.php" method="post" enctype="multipart/form-data">
-            <label for="photo">Choisir une photo :</label>
-            <input type="file" name="photo" id="photo" accept="image/*" required>
-            <br>
-            <label for="commentaire">Commentaire :</label>
-            <textarea name="commentaire" id="commentaire" rows="4" required></textarea>
-            <br>
-            <button type="submit">Publier</button>
-        </form>
-    </section>
+    <button id="ouvrirFormulaire"><i class="fa-solid fa-plus"></i></button>
 
-        <script>
+    <!-- La boîte modale -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Ajouter un post</h2>
+            <form action="reseau_back.php" method="post" enctype="multipart/form-data">
+                <label for="photo">Choisir une photo :</label>
+                <input type="file" name="photo" id="photo" accept="image/*" required>
+                <br>
+                <label for="commentaire">Commentaire :</label>
+                <textarea name="commentaire" id="commentaire" rows="4" required></textarea>
+                <br>
+                <button class="btn-form" type="submit">Publier</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Affiche la boîte modale lorsque le bouton est cliqué
+        document.getElementById('ouvrirFormulaire').addEventListener('click', function() {
+            document.getElementById('myModal').style.display = "block";
+        });
+
+        // Ferme la boîte modale lorsque l'utilisateur clique sur le bouton de fermeture
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('myModal').style.display = "none";
+        });
+
+        // Ferme la boîte modale lorsque l'utilisateur clique en dehors de la boîte modale
+        window.addEventListener('click', function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+
+
         var burgerMenu = document.getElementById('burger-menu');
 
         var overlay = document.getElementById('menu');
@@ -155,12 +180,6 @@ $posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
         burgerMenu.addEventListener('click', function() {
             this.classList.toggle("close");
             overlay.classList.toggle("overlay");
-            if (test.style.display === "none") {
-                test.style.display = "block";
-            }
-            else {
-                test.style.display = "none";
-            }
         });
     </script>
 

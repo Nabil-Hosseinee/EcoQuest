@@ -31,7 +31,7 @@ if (isset($_SESSION['id_number']) && isset($_POST['commentaire'])) {
 
             if ($stmt_insert->execute()) {
                 echo 'Post ajouté avec succès!';
-                // Rediriger ou afficher un message de succès
+                header('reseau.php');
             } else {
                 echo 'Erreur lors de l\'ajout du post.';
             }
