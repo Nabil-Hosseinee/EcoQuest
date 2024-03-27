@@ -98,21 +98,24 @@ a {
   text-decoration: none;
 }
 button {
+  position: absolute;
+  top: 3vh;
+  left: 2vw;
   width: 8vw;
   border-radius: 32px;
   height: 5vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #BDE3FF;
-  border: 2px solid #384955;
+  background-color: #ffb6c1;
+  border: 2px solid black;
   transition: 0.3s ease;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #384955;
-  border: 1px solid #BDE3FF;
+  background-color: rgb(255, 107, 132);
+  border: 1px solid white;
   transform: scale(1.1);
   color: white;
 }
@@ -144,17 +147,31 @@ button i {
 
 /* Map dans hamburger */
 .image-container {
-  width: 100%; 
-  max-width: 100vw; 
-  min-height: 100vh;
-  margin: 0 auto; 
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  z-index: -1;
 }
 
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+
 .responsive-image {
-  width: 100%; 
-  height: auto; 
-  display: block; 
-  max-width: 100%; 
+  width: 100%; /* L'image occupe 100% de la largeur de son conteneur */
+  height: auto; /* Laisse le navigateur calculer automatiquement la hauteur pour conserver les proportions */
+  display: block; /* Assure que l'image est affichée comme un élément de bloc pour gérer le remplissage et la marge correctement */
+  max-width: 100%; /* Garantit que l'image ne dépasse pas sa taille originale */
 }
 
 .point a {
@@ -171,41 +188,41 @@ button i {
   animation-play-state: paused;
 }
 
-.reseau_point {
+.profil_point {
   position: absolute;
-  top: 40vh;
-  left: 45vw;
+  top: 45vh;
+  left: 49vw;
   animation: float 2s infinite;
 }
 
 .shop_point {
   position: absolute;
-  top: 65vh;
-  left: 73vw;
+  top: 73vh;
+  left: 50.5vw;
   animation: float 2s infinite;
   animation-delay: 0.5s;
 }
 
 .defis_point {
   position: absolute;
-  top: 75vh;
-  left: 35vw;
+  top: 23vh;
+  left: 40vw;
   animation: float 2s infinite;
   animation-delay: 1s;
 }
 
-.profil_point {
+.reseau_point {
   position: absolute;
-  top: 37vh;
-  left: 27vw;
+  top: 59.5vh;
+  left: 40.5vw;
   animation: float 2s infinite;
   animation-delay: 1.5s;
 }
 
 .dashboard_point {
   position: absolute;
-  top: 33vh;
-  left: 68vw;
+  top: 28vh;
+  left: 61.5vw;
   animation: float 2s infinite;
   animation-delay: 2s;
 }
@@ -215,6 +232,7 @@ button i {
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0); }
 }
+
 
 /* text-container */
 @keyframes slideIn {
@@ -346,6 +364,27 @@ button i {
     overflow: hidden;
 }
 
+.monnaie {
+  position: fixed;
+  top: 3vh;
+  left: 5vw;
+  z-index: 99999;
+  display: flex;
+  /* flex-direc tion: column; */
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.monnaie h3{
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+.monnaie p {
+  font-size: 20px;
+}
+
 .bg-banner {
   min-height: 30vh;
 }
@@ -371,7 +410,7 @@ button i {
     /* z-index: 999; */
     position: absolute;
     /* backdrop-filter: blur(3px); */
-    color: black;
+    color: white;
 }
 
 .photo {

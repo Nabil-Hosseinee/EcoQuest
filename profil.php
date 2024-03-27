@@ -19,6 +19,14 @@ $resultAvatar = $db->prepare($demandeAvatar);
 $resultAvatar->execute();
 $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
 
+$demandeMonnaie = "SELECT Monnaie FROM user WHERE Id_user = $id_num";
+$resultMonnaie = $db->prepare($demandeMonnaie);
+$resultMonnaie->execute();
+$defMonnaie = $resultMonnaie->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($defMonnaie as $defMonnaies) {
+    $argent = $defMonnaies['Monnaie'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -55,27 +63,27 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
         </a>
 
         <div class="image-container">
-            <img src="./images/carte.jpg" alt="" class="responsive-image">
+            <img src="./images/carte-fefe4.png" alt="" class="background-image">
         </div>
-    
+
         <div class="point defis_point" data-text="Défis">
             <a href="defis.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
-    
+
         <div class="point profil_point" data-text="Profil">
             <a href="profil.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
-    
+
         <div class="point reseau_point" data-text="Réseau">
-            <a href=""><i class="fa-solid fa-location-dot"></i></a>
+            <a href="reseau.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
-    
+
         <div class="point dashboard_point" data-text="Dashboard">
-            <a href="dash.html"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="dash.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
-    
+
         <div class="point shop_point" data-text="Boutique">
-            <a href="shop.html"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="shop.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     </div>
 
@@ -104,6 +112,10 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <div class="banner">
+        <div class="monnaie">
+            <h3>Votre monnaie :</h3>
+            <p><?php echo $argent; ?></p>
+        </div>
         <div class="bg-banner">
             <img id="affichage-banner" src="./images/items/ban2.jpg" alt="">
         </div>

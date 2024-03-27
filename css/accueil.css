@@ -58,7 +58,7 @@ button i {
     font-size: 16px;
 }
 
-.container {
+.image-container {
     position: relative;
     width: 100%;
     height: 100vh;
@@ -74,7 +74,7 @@ button i {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain ;
+    object-fit: cover;
     z-index: -1;
 }
 
@@ -109,7 +109,7 @@ button i {
 
 .shop_point {
     position: absolute;
-    top: 68.5vh;
+    top: 73vh;
     left: 50.5vw;
     animation: float 2s infinite;
     animation-delay: 0.5s;
@@ -117,8 +117,8 @@ button i {
 
 .defis_point {
     position: absolute;
-    top: 20vh;
-    left: 41.5vw;
+    top: 23vh;
+    left: 40vw;
     animation: float 2s infinite;
     animation-delay: 1s;
 }
@@ -133,7 +133,7 @@ button i {
 
 .dashboard_point {
     position: absolute;
-    top: 31vh;
+    top: 28vh;
     left: 61.5vw;
     animation: float 2s infinite;
     animation-delay: 2s;

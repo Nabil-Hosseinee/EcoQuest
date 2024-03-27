@@ -30,6 +30,15 @@ $posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
             <h2>Où veux-tu te rendre ?</h2>
         </div>
 
+        <a href="deconnexion.php">
+            <button class="deco">
+                <p>Déconnexion</p>
+                <div class="deco_icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </button>
+        </a>
+
         <div class="image-container">
             <img src="./images/carte-fefe4.png" alt="" class="background-image">
         </div>
@@ -51,7 +60,7 @@ $posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
         </div>
     
         <div class="point shop_point" data-text="Boutique">
-            <a href="shop.html"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="shop.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     </div>
 
