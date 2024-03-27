@@ -3,8 +3,12 @@ session_start();
 
 include("connect_bdd.php");
 
+// Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['id_number']) && isset($_POST['commentaire'])) {
+    // Récupérer l'ID de l'utilisateur à partir de la session
     $id_utilisateur = $_SESSION['id_number'];
+    
+    // Récupérer le commentaire depuis le formulaire
     $commentaire = $_POST['commentaire'];
 
     // Vérifier si un fichier a été téléchargé
@@ -36,6 +40,6 @@ if (isset($_SESSION['id_number']) && isset($_POST['commentaire'])) {
         echo 'Aucun fichier téléchargé ou une erreur est survenue.';
     }
 } else {
-    echo 'Veuillez fournir un commentaire.';
+    echo 'Veuillez vous connecter pour pouvoir poster.';
 }
 ?>

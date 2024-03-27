@@ -65,50 +65,38 @@ $posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <section id="blog">
-        <div class="blog-heading">
-            <span>Actualités</span>
-            <h3>Communauté</h3>
-        </div>
+    <div class="blog-heading">
+        <span>Actualités</span>
+        <h3>Communauté</h3>
+    </div>
 
-        <div class="blog-container">
-            <div class="blog-box">
-                <div class="blog-img">
-                    <img src="images/commu/eoliennes.jpg" alt="blog">
-                </div>
+    <div class="blog-container">
+        <?php
+        include('connect_bdd.php');
+        $sql_select_posts = "SELECT post.*, user.Nom, user.Grade FROM post LEFT JOIN user ON post.user_Id = user.Id_user ORDER BY Id_post DESC LIMIT 3";
+        $result_select_posts = $db->prepare($sql_select_posts);
+        $result_select_posts->execute();
+        $posts = $result_select_posts->fetchAll(PDO::FETCH_ASSOC);
 
-                <div class="blog-text">
-                    <span>18 mars 2023 / Eoliennes</span>
-                    <a href="#" class="blog-title">De nouvelles éoliennes installées</a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus maiores obcaecati, repellat id aspernatur eaque numquam adipisci sapiente voluptatum vitae ut excepturi libero facilis, ratione ex recusandae voluptas esse dignissimos?</p>
-                    <a href="#">Lire la suite</a>
-                </div>
-            </div>
-            <div class="blog-box">
-                <div class="blog-img">
-                    <img src="images/commu/bouteille.jpg" alt="blog">
-                </div>
+        foreach ($posts as $post) {
+            $commentaire = isset($post['Commentaire']) ? $post['Commentaire'] : '';
+            $nom_utilisateur = isset($post['Nom']) ? $post['Nom'] : 'Utilisateur inconnu';
+            $grade_utilisateur = isset($post['Grade']) ? $post['Grade'] : '';
 
-                <div class="blog-text">
-                    <span>18 mars 2023 / Eoliennes</span>
-                    <a href="#" class="blog-title">De nouvelles éoliennes installées</a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus maiores obcaecati, repellat id aspernatur eaque numquam adipisci sapiente voluptatum vitae ut excepturi libero facilis, ratione ex recusandae voluptas esse dignissimos?</p>
-                    <a href="#">Lire la suite</a>
-                </div>
-            </div>
-            <div class="blog-box">
-                <div class="blog-img">
-                    <img src="images/commu/usine.jpg" alt="blog">
-                </div>
+            echo "<div class='custom-post-container'>";
+            echo "<div class='custom-post-image'>";
+            echo "<img src='data:image/jpeg;base64," . base64_encode($post['Photo']) . "' alt='Image du post'>";
+            echo "</div>";
+            echo "<div class='custom-post-info'>";
+            echo "<p class='custom-top-left-text'><strong>$nom_utilisateur</strong> - $grade_utilisateur</p>";
+            echo "<p class='custom-comment'>$commentaire</p>";
+            echo "</div>";
+            echo "</div>";
+        }
+        ?>
+    </div>
+</section>
 
-                <div class="blog-text">
-                    <span>18 mars 2023 / Eoliennes</span>
-                    <a href="#" class="blog-title">De nouvelles éoliennes installées</a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus maiores obcaecati, repellat id aspernatur eaque numquam adipisci sapiente voluptatum vitae ut excepturi libero facilis, ratione ex recusandae voluptas esse dignissimos?</p>
-                    <a href="#">Lire la suite</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <input type="radio" name="photos" id="check1" checked>
     <input type="radio" name="photos" id="check2">
@@ -117,19 +105,33 @@ $posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="container">
         <h1>Posts</h1>
-        <div class="photo-gallery">
-            <?php foreach ($posts as $post): ?>
-                <div class="pic">
-                    <?php if (isset($post['Photo']) && isset($post['Commentaire'])): ?>
-                        <!-- Afficher l'image et le commentaire si disponibles -->
-                        <img src="data:image/jpeg;base64,<?= base64_encode($post['Photo']) ?>" alt="Image du post">
-                        <p><?= $post['Commentaire'] ?></p>
-                    <?php else: ?>
-                        <p>Données du post non disponibles.</p>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
+        <?php
+    include('connect_bdd.php');
+    $sql_select_posts = "SELECT post.*, user.Nom, user.Grade FROM post 
+                         LEFT JOIN user ON post.user_Id = user.Id_user ORDER BY Id_post DESC";
+    $result_select_posts = $db->prepare($sql_select_posts);
+    $result_select_posts->execute();
+    $posts = $result_select_posts->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($posts as $post) {
+        $commentaire = isset($post['Commentaire']) ? $post['Commentaire'] : '';
+        $nom_utilisateur = isset($post['Nom']) ? $post['Nom'] : 'Utilisateur inconnu';
+        $grade_utilisateur = isset($post['Grade']) ? $post['Grade'] : '';
+
+        echo "<div class='post-container'>";
+        echo "<div class='post-image'>";
+        echo "<img src='data:image/jpeg;base64," . base64_encode($post['Photo']) . "' alt='Image du post'>";
+        echo "</div>";
+        echo "<div class='post-info'>";
+        echo "<p class=top-left-text><strong>$nom_utilisateur</strong> - $grade_utilisateur</p>";
+        echo "<p class='comment'>$commentaire</p>";
+        echo "</div>";
+        echo "</div>";
+    }
+?>
+
+
+
     </div>
 
     <section id="add-post">
