@@ -52,9 +52,6 @@ if (isset($_POST['itemId'])) {
             echo "<script>alert('Vous n'avez pas assez d'argent pour acheter cet item.');</script>";
             header("Location: shop.php");
         }
-
-
-        // header("Location: shop.php");
     }
     else {
         echo "Sessions utilisatuer non trouvée. Veuillez vous connecter.";
