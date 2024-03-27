@@ -49,6 +49,10 @@ button:hover {
     color: white;
 }
 
+button p {
+    font-family: "Jua", sans-serif;
+}
+
 button i {
     font-size: 16px;
 }
