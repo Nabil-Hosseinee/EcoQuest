@@ -3,6 +3,15 @@ session_start();
 include('connect_bdd.php');
 $id_num = $_SESSION['id_number'];
 $identidiant = $_SESSION['identifiant'];
+
+$demandeMonnaie = "SELECT Monnaie FROM user WHERE Id_user = $id_num";
+$resultMonnaie = $db->prepare($demandeMonnaie);
+$resultMonnaie->execute();
+$defMonnaie = $resultMonnaie->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($defMonnaie as $defMonnaies) {
+    $argent = $defMonnaies['Monnaie'];
+}
  
 ?>
 
@@ -31,7 +40,7 @@ $identidiant = $_SESSION['identifiant'];
         </div>
 
         <a href="deconnexion.php">
-            <button>
+            <button class="deco">
                 <p>Déconnexion</p>
                 <div class="deco_icon">
                     <i class="fa-solid fa-right-from-bracket"></i>
@@ -40,36 +49,40 @@ $identidiant = $_SESSION['identifiant'];
         </a>
 
         <div class="image-container">
-            <img src="./images/carte.jpg" alt="" class="responsive-image">
+            <img src="./images/carte-fefe4.png" alt="" class="background-image">
         </div>
-    
+
         <div class="point defis_point" data-text="Défis">
             <a href="defis.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
-    
+
         <div class="point profil_point" data-text="Profil">
             <a href="profil.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
-    
+
         <div class="point reseau_point" data-text="Réseau">
-            <a href=""><i class="fa-solid fa-location-dot"></i></a>
+            <a href="reseau.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
-    
+
         <div class="point dashboard_point" data-text="Dashboard">
             <a href="dash.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
-    
+
         <div class="point shop_point" data-text="Boutique">
-            <a href="shop.html"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="shop.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     </div>
     
     <div class="banner">
+        <div class="monnaie">
+            <h3>Votre monnaie :</h3>
+            <p><?php echo $argent; ?></p>
+        </div>
         <div class="bg-banner">
-            <img id="affichage-banner" src="./images/items/ban5.png" alt="">
+            <img id="affichage-banner" src="./images/items/ban3.jpg" alt="">
         </div>
         <div class="overlay-text">
-            <h1>Boutique</h1>
+            <h1>BOUTIQUE</h1>
             <h2>Dépense les points que tu as gagné avec les défis ici !</h2>
         </div>
     </div>
@@ -122,7 +135,7 @@ $identidiant = $_SESSION['identifiant'];
                                     <form action='achat_realise.php' method='post' id='$id_banner'>
                                         <p>Prix : $prix</p>
                                         <input type='hidden' name='itemId' value='$id_banner' form='$id_banner'>
-                                        <button type='submit' name='achat_item'>Acheter cet item</button>
+                                        <button class='btn-avatar' type='submit' name='achat_item'>Acheter cet item</button>
                                     </form>
                                 ";
                             }
@@ -164,7 +177,7 @@ $identidiant = $_SESSION['identifiant'];
                                     <form action='achat_realise.php' method='post' id='$id_avatar'>
                                         <p>Prix : $prix</p>
                                         <input type='hidden' name='itemId' value='$id_avatar' form='$id_avatar'>
-                                        <button type='submit' name='achat_item'>Acheter cet item</button>
+                                        <button class='btn-avatar' type='submit' name='achat_item'>Acheter cet item</button>
                                     </form>
                                 ";
                             }

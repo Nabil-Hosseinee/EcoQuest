@@ -28,6 +28,15 @@ $id_num = $_SESSION['id_number'];
             <h2>Où veux-tu te rendre ?</h2>
         </div>
 
+        <a href="deconnexion.php">
+            <button class="deco">
+                <p>Déconnexion</p>
+                <div class="deco_icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </button>
+        </a>
+
         <div class="image-container">
             <img src="./images/carte-fefe4.png" alt="" class="background-image">
         </div>

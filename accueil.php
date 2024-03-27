@@ -68,7 +68,7 @@ if ($tmpFile !== false) {
         </button>
     </a>
 
-    <div class="container">
+    <div class="image-container">
         <img src="./images/carte-fefe4.png" alt="" class="background-image">
     </div>
 
