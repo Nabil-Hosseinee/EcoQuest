@@ -18,6 +18,7 @@ $demandeAvatar = "SELECT * FROM `item` WHERE `Type` = 'Avatar'";
 $resultAvatar = $db->prepare($demandeAvatar);
 $resultAvatar->execute();
 $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +103,6 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-
     <div class="banner">
         <div class="bg-banner">
             <img id="affichage-banner" src="./images/items/ban2.jpg" alt="">
@@ -113,8 +113,6 @@ $defAvatar = $resultAvatar->fetchAll(PDO::FETCH_ASSOC);
             <div class="pseudo"><?php echo "@" . $pseudo?> / [<?php echo $grade; ?>]</div>
         </div>
     </div>
-
-    
 
     <div class="container">
         <div class="defi-info">
