@@ -136,7 +136,6 @@ $posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
 
     <button id="ouvrirFormulaire"><i class="fa-solid fa-plus"></i></button>
 
-    <!-- La boîte modale -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
@@ -154,17 +153,15 @@ $posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <script>
-        // Affiche la boîte modale lorsque le bouton est cliqué
+        // Modal
         document.getElementById('ouvrirFormulaire').addEventListener('click', function() {
             document.getElementById('myModal').style.display = "block";
         });
 
-        // Ferme la boîte modale lorsque l'utilisateur clique sur le bouton de fermeture
         document.getElementById('closeModal').addEventListener('click', function() {
             document.getElementById('myModal').style.display = "none";
         });
 
-        // Ferme la boîte modale lorsque l'utilisateur clique en dehors de la boîte modale
         window.addEventListener('click', function(event) {
             var modal = document.getElementById('myModal');
             if (event.target == modal) {
@@ -172,7 +169,7 @@ $posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
             }
         });
 
-
+        // Menu
         var burgerMenu = document.getElementById('burger-menu');
 
         var overlay = document.getElementById('menu');

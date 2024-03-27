@@ -3,26 +3,19 @@ session_start();
 
 include("connect_bdd.php");
 
-// Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['id_number']) && isset($_POST['commentaire'])) {
-    // Récupérer l'ID de l'utilisateur à partir de la session
     $id_utilisateur = $_SESSION['id_number'];
     
-    // Récupérer le commentaire depuis le formulaire
     $commentaire = $_POST['commentaire'];
 
-    // Vérifier si un fichier a été téléchargé
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-        // Lire le contenu du fichier
         $photo_content = file_get_contents($_FILES['photo']['tmp_name']);
 
-        // Vérifier la taille maximale autorisée (en octets)
-        $maxFileSize = 55 * 1024 ; // 55 Ko 
+        $maxFileSize = 55 * 1024 ; // 55 Ko max
 
         if ($_FILES['photo']['size'] > $maxFileSize) {
             echo 'La taille du fichier est trop grande. Veuillez choisir un fichier plus petit.';
         } else {
-            // Insérer les données dans la base de données
             $sql_insert = "INSERT INTO post (user_Id, commentaire, photo) VALUES (:user_Id, :commentaire, :photo)";
             $stmt_insert = $db->prepare($sql_insert);
             $stmt_insert->bindParam(':user_Id', $id_utilisateur);

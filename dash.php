@@ -127,7 +127,7 @@ include('grade.php');
             $stmt_avg_impact = $db->prepare($sql_avg_impact);
             $stmt_avg_impact->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $stmt_avg_impact->execute();
-            $avg_impact = $stmt_avg_impact->fetchColumn(); // Récupère directement la moyenne de la première colonne
+            $avg_impact = $stmt_avg_impact->fetchColumn(); 
             
             // Total Score
             $sql_total_score = "SELECT `Total score` FROM user WHERE Id_user = :user_id";

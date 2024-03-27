@@ -1,3 +1,3 @@
 <?php
-// Pas encore utile
+// Gérer les graphiques
 ?>

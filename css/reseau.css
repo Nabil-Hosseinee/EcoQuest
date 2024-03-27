@@ -256,22 +256,21 @@ body {
       .point:hover::before {
         content: attr(data-text);
         position: absolute;
-        top: -5vh; /* Ajustez la position verticale du texte */
+        top: -5vh; 
         left: -2.5vw;
         transform: translateX(-50%);
-        background-color: rgb(255, 107, 132, 0.9); /* Couleur de fond du texte */
-        color: white; /* Couleur du texte */
-        font-weight: bold;
-        padding: 10px 50px; /* Espace intérieur du texte */
-        border-radius: 5px; /* Arrondi des coins */
-        animation: slideIn 0.5s forwards; /* Applique l'animation d'apparition */
+        background-color: rgb(255, 107, 132, 0.9); 
+        color: white; 
+        padding: 10px 50px; 
+        border-radius: 5px; 
+        animation: slideIn 0.5s forwards; 
         font-size: 16px;
       }
       
       .text-container {
         position: relative;
-        width: 200px; /* Ajustez la largeur du conteneur selon vos besoins */
-        height: 200px; /* Ajustez la hauteur du conteneur selon vos besoins */
+        width: 200px; 
+        height: 200px; 
       }
 
 
@@ -446,19 +445,19 @@ input{
 }
 
 .post-container .top-left-text {
-    position: absolute; /* Positionnement absolu */
-    top: 5%; /* Distance depuis le haut */
-    left: 50%; /* Distance depuis la gauche */
-    color: black; /* Couleur du texte */
-    font-size: 24px; /* Taille du texte */
+    position: absolute; 
+    top: 5%; 
+    left: 50%; 
+    color: black; 
+    font-size: 24px; 
 }
 
 .post-container .comment {
-    position: absolute; /* Positionnement absolu */
-    top: 25%; /* Distance depuis le haut */
-    left: 50%; /* Distance depuis la gauche */
-    color: black; /* Couleur du texte */
-    font-size: 20px; /* Taille du texte */
+    position: absolute; 
+    top: 25%; 
+    left: 50%; 
+    color: black; 
+    font-size: 20px; 
 }
 
 
@@ -488,9 +487,9 @@ input{
 
 
 .post-container img {
-    width: 100%; /* Largeur de l'image */
-    height: auto; /* Hauteur automatique pour conserver les proportions */
-    object-fit: cover; /* Pour s'assurer que l'image est bien ajustée */
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
 }
 
 h1{
@@ -579,8 +578,8 @@ label:hover{
 
 .pic img {
     width: 100%;
-    height: 100%; /* Utiliser 'auto' pour conserver les proportions de l'image */
-    object-fit: cover; /* Redimensionner l'image pour remplir complètement le conteneur tout en conservant les proportions */
+    height: 100%; 
+    object-fit: cover; 
 }
 
 .pic:after{
@@ -696,7 +695,7 @@ label:hover{
 
 
   #add-post {
-    display: none; /* Cache le formulaire d'ajout de post */
+    display: none;
 }
 
     #ouvrirFormulaire {
@@ -715,9 +714,6 @@ label:hover{
     transition: 0.3s ease;
     cursor: pointer;
 }
-
-
-
 
 
 .modal {
@@ -743,7 +739,6 @@ label:hover{
     text-align: center;
 }
 
-/* Style pour le bouton de fermeture */
 .close {
     color: #aaa;
     float: right;

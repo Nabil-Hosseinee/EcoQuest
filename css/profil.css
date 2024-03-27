@@ -168,10 +168,10 @@ button i {
 
 
 .responsive-image {
-  width: 100%; /* L'image occupe 100% de la largeur de son conteneur */
-  height: auto; /* Laisse le navigateur calculer automatiquement la hauteur pour conserver les proportions */
-  display: block; /* Assure que l'image est affichée comme un élément de bloc pour gérer le remplissage et la marge correctement */
-  max-width: 100%; /* Garantit que l'image ne dépasse pas sa taille originale */
+  width: 100%; 
+  height: auto; 
+  display: block; 
+  max-width: 100%; 
 }
 
 .point a {
@@ -243,22 +243,22 @@ button i {
 .point:hover::before {
   content: attr(data-text);
   position: absolute;
-  top: -5vh; /* Ajustez la position verticale du texte */
+  top: -5vh; 
   left: -2.5vw;
   transform: translateX(-50%);
-  background-color: rgb(255, 107, 132, 0.9); /* Couleur de fond du texte */
-  color: white; /* Couleur du texte */
+  background-color: rgb(255, 107, 132, 0.9); 
+  color: white; 
   font-weight: bold;
-  padding: 10px 50px; /* Espace intérieur du texte */
-  border-radius: 5px; /* Arrondi des coins */
-  animation: slideIn 0.5s forwards; /* Applique l'animation d'apparition */
+  padding: 10px 50px; 
+  border-radius: 5px; 
+  animation: slideIn 0.5s forwards; 
   font-size: 16px;
 }
 
 .text-container {
   position: relative;
-  width: 200px; /* Ajustez la largeur du conteneur selon vos besoins */
-  height: 200px; /* Ajustez la hauteur du conteneur selon vos besoins */
+  width: 200px; 
+  height: 200px; 
 }
 
 /* test */
