@@ -1,3 +1,13 @@
+<?php
+include("connect_bdd.php");
+
+$sql_select_posts = "SELECT * FROM post ORDER BY Id_post DESC"; 
+$stmt_select_posts = $db->query($sql_select_posts);
+$posts = $stmt_select_posts->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +25,7 @@
         <span></span>
     </div>
 
-
     <div id="menu">
-
         <div class="info">
             <h2>Où veux-tu te rendre ?</h2>
         </div>
@@ -57,18 +65,15 @@
     </div>
 
     <section id="blog">
-
         <div class="blog-heading">
             <span>Actualités</span>
             <h3>Communauté</h3>
         </div>
 
         <div class="blog-container">
-
             <div class="blog-box">
-
-                <div class="blog-img" >
-                    <img src="images/eoliennes.jpg" alt="blog">
+                <div class="blog-img">
+                    <img src="images/commu/eoliennes.jpg" alt="blog">
                 </div>
 
                 <div class="blog-text">
@@ -76,13 +81,11 @@
                     <a href="#" class="blog-title">De nouvelles éoliennes installées</a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus maiores obcaecati, repellat id aspernatur eaque numquam adipisci sapiente voluptatum vitae ut excepturi libero facilis, ratione ex recusandae voluptas esse dignissimos?</p>
                     <a href="#">Lire la suite</a>
-                    
                 </div>
             </div>
             <div class="blog-box">
-
-                <div class="blog-img" >
-                    <img src="images/bouteille.jpg" alt="blog">
+                <div class="blog-img">
+                    <img src="images/commu/bouteille.jpg" alt="blog">
                 </div>
 
                 <div class="blog-text">
@@ -90,13 +93,11 @@
                     <a href="#" class="blog-title">De nouvelles éoliennes installées</a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus maiores obcaecati, repellat id aspernatur eaque numquam adipisci sapiente voluptatum vitae ut excepturi libero facilis, ratione ex recusandae voluptas esse dignissimos?</p>
                     <a href="#">Lire la suite</a>
-                    
                 </div>
             </div>
             <div class="blog-box">
-
-                <div class="blog-img" >
-                    <img src="images/usine.jpg" alt="blog">
+                <div class="blog-img">
+                    <img src="images/commu/usine.jpg" alt="blog">
                 </div>
 
                 <div class="blog-text">
@@ -104,11 +105,8 @@
                     <a href="#" class="blog-title">De nouvelles éoliennes installées</a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus maiores obcaecati, repellat id aspernatur eaque numquam adipisci sapiente voluptatum vitae ut excepturi libero facilis, ratione ex recusandae voluptas esse dignissimos?</p>
                     <a href="#">Lire la suite</a>
-                    
                 </div>
             </div>
-            
-
         </div>
     </section>
 
@@ -119,47 +117,24 @@
 
     <div class="container">
         <h1>Posts</h1>
-        <div class="top-content">
-            <h3>Récent</h3>
-            <label for="check1">Tous</label>
-            <!-- <label for="check2">Abonnements</label> -->
-            <label for="check3">Moi</label>
-            <!-- <label for="check4">Découvrir</label> -->
-        </div>
         <div class="photo-gallery">
-            <div class="pic place">
-                <img src="images/bouteille.jpg" alt="">
-            </div>
-            <div class="pic family">
-                <img src="images/recyclage2.jpg" alt="">
-            </div>
-            <div class="pic child">
-                <img src="images/recyclage3.jpg" alt="">
-            </div>
-            <div class="pic place">
-                <img src="images/recyclage4.jpg" alt="">
-            </div>
-            <div class="pic family">
-                <img src="images/recyclage5.jpg" alt="">
-            </div>
-            <div class="pic child">
-                <img src="images/recyclage6.jpg" alt="">
-            </div>
-            <div class="pic place">
-                <img src="images/recyclage7.jpg" alt="">
-            </div>
-            <div class="pic family">
-                <img src="images/recyclage8.jpg" alt="">
-            </div>
-            <div class="pic child">
-                <img src="images/recyclage9.jpg" alt="">
-            </div>
+            <?php foreach ($posts as $post): ?>
+                <div class="pic">
+                    <?php if (isset($post['Photo']) && isset($post['Commentaire'])): ?>
+                        <!-- Afficher l'image et le commentaire si disponibles -->
+                        <img src="data:image/jpeg;base64,<?= base64_encode($post['Photo']) ?>" alt="Image du post">
+                        <p><?= $post['Commentaire'] ?></p>
+                    <?php else: ?>
+                        <p>Données du post non disponibles.</p>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
     <section id="add-post">
         <h2>Ajouter un post</h2>
-        <form action="add_post.php" method="post" enctype="multipart/form-data">
+        <form action="reseau_back.php" method="post" enctype="multipart/form-data">
             <label for="photo">Choisir une photo :</label>
             <input type="file" name="photo" id="photo" accept="image/*" required>
             <br>

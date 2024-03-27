@@ -1,28 +1,41 @@
 <?php
-include 'connect_bdd.php';
+session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $imagePath = ''; // Variable pour stocker le chemin de l'image
+include("connect_bdd.php");
 
-    // Vérifiez si une image a été téléchargée
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        // Déplacez l'image vers un répertoire de destination (par exemple, 'uploads/')
-        $uploadDir = 'uploads/';
-        $imageName = $_FILES['image']['name'];
-        $imagePath = $uploadDir . $imageName;
-        move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
+if (isset($_SESSION['id_number']) && isset($_POST['commentaire'])) {
+    $id_utilisateur = $_SESSION['id_number'];
+    $commentaire = $_POST['commentaire'];
+
+    // Vérifier si un fichier a été téléchargé
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+        // Lire le contenu du fichier
+        $photo_content = file_get_contents($_FILES['photo']['tmp_name']);
+
+        // Vérifier la taille maximale autorisée (en octets)
+        $maxFileSize = 55 * 1024 ; // 55 Ko 
+
+        if ($_FILES['photo']['size'] > $maxFileSize) {
+            echo 'La taille du fichier est trop grande. Veuillez choisir un fichier plus petit.';
+        } else {
+            // Insérer les données dans la base de données
+            $sql_insert = "INSERT INTO post (user_Id, commentaire, photo) VALUES (:user_Id, :commentaire, :photo)";
+            $stmt_insert = $db->prepare($sql_insert);
+            $stmt_insert->bindParam(':user_Id', $id_utilisateur);
+            $stmt_insert->bindParam(':commentaire', $commentaire);
+            $stmt_insert->bindParam(':photo', $photo_content, PDO::PARAM_LOB);
+
+            if ($stmt_insert->execute()) {
+                echo 'Post ajouté avec succès!';
+                // Rediriger ou afficher un message de succès
+            } else {
+                echo 'Erreur lors de l\'ajout du post.';
+            }
+        }
+    } else {
+        echo 'Aucun fichier téléchargé ou une erreur est survenue.';
     }
-
-    // Récupérez d'autres données du formulaire
-    $userId = $_SESSION['user_id']; // Vous devez gérer l'authentification de l'utilisateur
-    $commentaire = $_POST['commentaire']; // Assurez-vous de nettoyer et de valider les données
-
-    // Insérez les données dans la table post
-    $stmt = $db->prepare("INSERT INTO post (user_Id, Photo, Commentaire, Chemin_image) VALUES (:userId, :photo, :commentaire, :imagePath)");
-    $stmt->bindParam(':userId', $userId);
-    $stmt->bindParam(':photo', 1); // Vous devez gérer l'ID de la photo
-    $stmt->bindParam(':commentaire', $commentaire);
-    $stmt->bindParam(':imagePath', $imagePath);
-    $stmt->execute();
+} else {
+    echo 'Veuillez fournir un commentaire.';
 }
 ?>
