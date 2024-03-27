@@ -21,7 +21,7 @@ $id_num = $_SESSION['id_number'];
         <span></span>
     </div>
       
-    
+
     <div id="menu">
 
         <div class="info">
@@ -60,7 +60,7 @@ $id_num = $_SESSION['id_number'];
     <header>
         <h2>Rapide, Facile et Utile</h2>
         <h1>Défis</h1>
-        <p>Remplissez vos défis, sauvez la planète et remplissez toutes vos quêtes</p>
+        <p>Remplissez vos défis, sauvez la planète et réalisez toutes vos quêtes</p>
     </header>
 
 
@@ -90,7 +90,7 @@ $id_num = $_SESSION['id_number'];
                 foreach ($defis_quotidiens as $defi_quotidien) {
                     $id_defis_quotidiens = $defi_quotidien['Id_defis'];
                     $difficulte_defi = $defi_quotidien['Difficulte'];
-                    
+                    $icone=$defi_quotidien['Icone'];
                     $intitule=$defi_quotidien['Intitule defis'];
 
                     $sql_statut="SELECT * FROM realisation WHERE user_id=$id_num AND defis_id=$id_defis_quotidiens";
@@ -102,13 +102,12 @@ $id_num = $_SESSION['id_number'];
 
                     //$statut=$defi_quotidien['Statut'];
                 
-                    echo "
-                        <div class='box' id='box'>
-                            <div class='icon-container'>
-                                <i class='fa-solid fa-bicycle'></i>
-                            </div>
+                    echo "<div class='box' id='box'>
+                    <div class='icon-container'>
+                        <img class='icon' src='$icone' alt='Icone du défi'>
+                    </div>";
 
-                            <div class='description'>
+                    echo "<div class='description'>
                                 <h3>Défi $difficulte_defi</h3>
                                 <p>$intitule</p>";
                     
@@ -178,7 +177,7 @@ $id_num = $_SESSION['id_number'];
 
                             <div class = 'all-icon'>
                                 <div class = 'icon-container'>
-                                    <i class='fa-solid fa-bicycle'></i>
+                                    <img class='icon' src='$icone' alt='Icone du défi'>
                                 </div>
                             </div>
 

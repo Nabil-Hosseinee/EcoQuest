@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 26 mars 2024 à 23:37
+-- Généré le : mer. 27 mars 2024 à 08:38
 -- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Version de PHP : 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,52 +47,53 @@ CREATE TABLE `defis` (
   `Difficulte` varchar(50) NOT NULL COMMENT '0:Facile\r\n1:Moyen\r\n2:Difficile',
   `Score` int(11) NOT NULL,
   `Argent gagne` int(11) NOT NULL,
-  `Impact` int(11) NOT NULL
+  `Impact` int(11) NOT NULL,
+  `Icone` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `defis`
 --
 
-INSERT INTO `defis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Argent gagne`, `Impact`) VALUES
-(8, 'Utilise un sac de courses réutilisable pour tous tes achats.', 'Facile', 25, 50, 50),
-(9, 'Achète au moins trois produits d\'une marque écologique ou éthique.', 'Facile', 25, 50, 50),
-(10, 'Achète uniquement des produits locaux et de saison pour tous tes repas de la journée.', 'Facile', 30, 60, 60),
-(11, 'Mange un produit provenant d’un rayon anti-gaspi d’un supermarché.', 'Facile', 20, 40, 40),
-(12, 'Bois uniquement de l’eau du robinet et non en bouteille.', 'Facile', 20, 40, 40),
-(13, 'Utilise une gourde ou une tasse réutilisable.', 'Facile', 20, 40, 40),
-(14, 'Sèche ton linge à l’air libre.', 'Facile', 20, 40, 40),
-(15, 'Remplace au moins un produit jetable par une alternative réutilisable.', 'Facile', 25, 50, 50),
-(16, 'Donne ou vends au moins un article inutilisé ou non désiré.', 'Facile', 25, 50, 50),
-(17, 'Achète un produit seconde main.', 'Facile', 25, 50, 50),
-(18, 'Rapporte une boîte de médicaments périmés à la pharmacie.', 'Facile', 20, 40, 40),
-(19, 'Sensibilise une personne de ton entourage sur les actions à entreprendre pour réduire son empreinte carbone.', 'Facile', 25, 50, 50),
-(20, 'Réalise tes achats sans aucun emballage plastique.', 'Moyen', 35, 70, 70),
-(21, 'Prépare et consomme un repas végétalien.', 'Moyen', 40, 80, 80),
-(22, 'Prépare et consomme un repas végétarien.', 'Moyen', 40, 80, 80),
-(23, 'Évite les aliments transformés et cuisine uniquement des produits frais.', 'Moyen', 35, 70, 70),
-(24, 'Estime et réduis le gaspillage alimentaire pour la journée.', 'Moyen', 35, 70, 70),
-(25, 'Utilise uniquement des modes de transport écologiques (vélo, transports en commun, marche) pour tous tes déplacements.', 'Moyen', 40, 80, 80),
-(26, 'Planifie une journée sans voiture et utilise exclusivement les transports en commun ou la marche.', 'Moyen', 40, 80, 80),
-(27, 'Réduis ta vitesse de conduite de 10 km/h par rapport à ta vitesse habituelle pour économiser du carburant.', 'Moyen', 35, 70, 70),
-(28, 'Opte pour le télétravail ou des réunions virtuelles plutôt que des déplacements physiques pour la journée.', 'Moyen', 35, 70, 70),
-(29, 'Opte pour le covoiturage ou le partage de véhicules pour tous tes trajets de la journée.', 'Moyen', 40, 80, 80),
-(30, 'Utilise uniquement des produits de nettoyage écologiques pour toutes les tâches ménagères.', 'Moyen', 35, 70, 70),
-(31, 'Éteins tous les appareils électroniques non essentiels pendant toute la journée.', 'Moyen', 35, 70, 70),
-(32, 'Réduis ta consommation d\'eau pour la journée en prenant des douches plus courtes et en limitant l\'utilisation de l\'eau courante.', 'Moyen', 35, 70, 70),
-(33, 'Privilégie la douche au bain.', 'Moyen', 35, 70, 70),
-(34, 'Utilise des ampoules à faible consommation.', 'Moyen', 35, 70, 70),
-(35, 'Mets les chauffages en dessous de 20 degrés.', 'Moyen', 35, 70, 70),
-(36, 'Trouve et achète un produit de seconde main dans un magasin de seconde main ou sur une plateforme en ligne.', 'Difficile', 50, 100, 100),
-(37, 'Réduis la consommation de viande et opte pour des alternatives végétales pour tous les repas de la journée.', 'Difficile', 45, 95, 95),
-(38, 'Récupère les invendus', 'Difficile', 45, 95, 95),
-(39, 'Plante un arbre ou une plante indigène dans ton jardin ou sur ton balcon.', 'Difficile', 50, 100, 100),
-(40, 'Crée un espace de jardinage écologique ou un potager sur ton balcon.', 'Difficile', 50, 100, 100),
-(41, 'Installe un système d\'arrosage économiseur d\'eau ou un récupérateur d\'eau de pluie pour une utilisation dans ton jardin.', 'Difficile', 50, 100, 100),
-(42, 'Récupère l’eau de pluie', 'Difficile', 50, 100, 100),
-(43, 'Organise ou participe à une opération de nettoyage de rue ou de plage dans ta communauté.', 'Difficile', 45, 95, 95),
-(44, 'Participe à un défi écologique en ligne ou rejoins une communauté virtuelle axée sur la durabilité.', 'Difficile', 45, 95, 95),
-(45, 'Implique la famille ou les amis dans un défi écologique pour une journée.', 'Difficile', 50, 100, 100);
+INSERT INTO `defis` (`Id_defis`, `Intitule defis`, `Difficulte`, `Score`, `Argent gagne`, `Impact`, `Icone`) VALUES
+(8, 'Utilise un sac de courses réutilisable pour tous tes achats.', 'Facile', 25, 50, 50, 'images/icons/shopping-cart-solid.svg'),
+(9, 'Achète au moins trois produits d\'une marque écologique ou éthique.', 'Facile', 25, 50, 50, 'images/icons/shopping-cart-solid.svg'),
+(10, 'Achète uniquement des produits locaux et de saison pour tous tes repas de la journée.', 'Facile', 30, 60, 60, 'images/icons/shopping-cart-solid.svg'),
+(11, 'Mange un produit provenant d’un rayon anti-gaspi d’un supermarché.', 'Facile', 20, 40, 40, 'images/icons/utensils-solid.svg'),
+(12, 'Bois uniquement de l’eau du robinet et non en bouteille.', 'Facile', 20, 40, 40, 'images/icons/utensils-solid.svg'),
+(13, 'Utilise une gourde ou une tasse réutilisable.', 'Facile', 20, 40, 40, 'images/icons/bolt-solid.svg'),
+(14, 'Sèche ton linge à l’air libre.', 'Facile', 20, 40, 40, 'images/icons/bolt-solid.svg'),
+(15, 'Remplace au moins un produit jetable par une alternative réutilisable.', 'Facile', 25, 50, 50, 'images/icons/utensils-solid.svg'),
+(16, 'Donne ou vends au moins un article inutilisé ou non désiré.', 'Facile', 25, 50, 50, 'images/icons/utensils-solid.svg'),
+(17, 'Achète un produit seconde main.', 'Facile', 25, 50, 50, 'images/icons/utensils-solid.svg'),
+(18, 'Rapporte une boîte de médicaments périmés à la pharmacie.', 'Facile', 20, 40, 40, 'images/icons/utensils-solid.svg'),
+(19, 'Sensibilise une personne de ton entourage sur les actions à entreprendre pour réduire son empreinte carbone.', 'Facile', 25, 50, 50, 'images/icons/shopping-basket-solid.svg'),
+(20, 'Réalise tes achats sans aucun emballage plastique.', 'Moyen', 35, 70, 70, 'images/icons/shopping-cart-solid.svg'),
+(21, 'Prépare et consomme un repas végétalien.', 'Moyen', 40, 80, 80, 'images/icons/utensils-solid.svg'),
+(22, 'Prépare et consomme un repas végétarien.', 'Moyen', 40, 80, 80, 'images/icons/utensils-solid.svg'),
+(23, 'Évite les aliments transformés et cuisine uniquement des produits frais.', 'Moyen', 35, 70, 70, 'images/icons/utensils-solid.svg'),
+(24, 'Estime et réduis le gaspillage alimentaire pour la journée.', 'Moyen', 35, 70, 70, 'images/icons/utensils-solid.svg'),
+(25, 'Utilise uniquement des modes de transport écologiques (vélo, transports en commun, marche) pour tous tes déplacements.', 'Moyen', 40, 80, 80, 'images/icons/bus-alt-solid.svg'),
+(26, 'Planifie une journée sans voiture et utilise exclusivement les transports en commun ou la marche.', 'Moyen', 40, 80, 80, 'images/icons/bus-alt-solid.svg'),
+(27, 'Réduis ta vitesse de conduite de 10 km/h par rapport à ta vitesse habituelle pour économiser du carburant.', 'Moyen', 35, 70, 70, 'images/icons/bus-alt-solid.svg'),
+(28, 'Opte pour le télétravail ou des réunions virtuelles plutôt que des déplacements physiques pour la journée.', 'Moyen', 35, 70, 70, 'images/icons/bus-alt-solid.svg'),
+(29, 'Opte pour le covoiturage ou le partage de véhicules pour tous tes trajets de la journée.', 'Moyen', 40, 80, 80, 'images/icons/bus-alt-solid.svg'),
+(30, 'Utilise uniquement des produits de nettoyage écologiques pour toutes les tâches ménagères.', 'Moyen', 35, 70, 70, 'images/icons/bolt-solid.svg'),
+(31, 'Éteins tous les appareils électroniques non essentiels pendant toute la journée.', 'Moyen', 35, 70, 70, 'images/icons/bolt-solid.svg'),
+(32, 'Réduis ta consommation d\'eau pour la journée en prenant des douches plus courtes et en limitant l\'utilisation de l\'eau courante.', 'Moyen', 35, 70, 70, 'images/icons/bolt-solid.svg'),
+(33, 'Privilégie la douche au bain.', 'Moyen', 35, 70, 70, 'images/icons/bolt-solid.svg'),
+(34, 'Utilise des ampoules à faible consommation.', 'Moyen', 35, 70, 70, 'images/icons/bolt-solid.svg'),
+(35, 'Mets les chauffages en dessous de 20 degrés.', 'Moyen', 35, 70, 70, 'images/icons/bolt-solid.svg'),
+(36, 'Trouve et achète un produit de seconde main dans un magasin de seconde main ou sur une plateforme en ligne.', 'Difficile', 50, 100, 100, 'images/icons/shopping-basket-solid.svg'),
+(37, 'Réduis la consommation de viande et opte pour des alternatives végétales pour tous les repas de la journée.', 'Difficile', 45, 95, 95, 'images/icons/shopping-basket-solid.svg'),
+(38, 'Récupère les invendus', 'Difficile', 45, 95, 95, 'images/icons/shopping-basket-solid.svg'),
+(39, 'Plante un arbre ou une plante indigène dans ton jardin ou sur ton balcon.', 'Difficile', 50, 100, 100, 'images/icons/tree-solid.svg'),
+(40, 'Crée un espace de jardinage écologique ou un potager sur ton balcon.', 'Difficile', 50, 100, 100, 'images/icons/tree-solid.svg'),
+(41, 'Installe un système d\'arrosage économiseur d\'eau ou un récupérateur d\'eau de pluie pour une utilisation dans ton jardin.', 'Difficile', 50, 100, 100, 'images/icons/tree-solid.svg'),
+(42, 'Récupère l’eau de pluie', 'Difficile', 50, 100, 100, 'images/icons/tree-solid.svg'),
+(43, 'Organise ou participe à une opération de nettoyage de rue ou de plage dans ta communauté.', 'Difficile', 45, 95, 95, 'images/icons/globe-solid.svg'),
+(44, 'Participe à un défi écologique en ligne ou rejoins une communauté virtuelle axée sur la durabilité.', 'Difficile', 45, 95, 95, 'images/icons/globe-solid.svg'),
+(45, 'Implique la famille ou les amis dans un défi écologique pour une journée.', 'Difficile', 50, 100, 100, 'images/icons/globe-solid.svg');
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,6 @@ CREATE TABLE `defis_quotidiens` (
 --
 
 INSERT INTO `defis_quotidiens` (`Id_defis_quotidiens`, `user_id`, `date`, `defi_id1`, `defi_id2`, `defi_id3`) VALUES
-(5, 1, '2024-03-26', 20, 13, 32),
 (6, 6, '2024-03-26', 38, 17, 43),
 (7, 5, '2024-03-26', 28, 44, 21),
 (8, 8, '2024-03-26', 11, 40, 42),
@@ -123,7 +123,8 @@ INSERT INTO `defis_quotidiens` (`Id_defis_quotidiens`, `user_id`, `date`, `defi_
 (11, 11, '2024-03-26', 32, 44, 12),
 (12, 12, '2024-03-26', 30, 31, 45),
 (13, 13, '2024-03-26', 21, 37, 32),
-(14, 14, '2024-03-26', 22, 23, 39);
+(14, 14, '2024-03-26', 22, 23, 39),
+(15, 1, '2024-03-27', 41, 32, 19);
 
 -- --------------------------------------------------------
 
@@ -193,7 +194,8 @@ CREATE TABLE `realisation` (
 --
 
 INSERT INTO `realisation` (`Id_realisation`, `user_Id`, `defis_Id`, `Statut`) VALUES
-(16, 1, 13, 2);
+(16, 1, 13, 2),
+(17, 1, 20, 2);
 
 -- --------------------------------------------------------
 
@@ -217,7 +219,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`Id_user`, `Nom`, `Identifiant`, `Mot de passe`, `Pseudo`, `Grade`, `Total score`, `Monnaie`) VALUES
-(1, 'Dylan', 'dydy@gmail.com', 'a16358be6e2306b153b1f071477e68837266075e', 'Dydy', 'Débutant Écolo', 110, 220),
+(1, 'Dylan', 'dydy@gmail.com', 'a16358be6e2306b153b1f071477e68837266075e', 'Dydy', 'Débutant Écolo', 145, 290),
 (5, 'Félix', 'fefe@gmail.com', '70c881d4a26984ddce795f6f71817c9cf4480e79', 'Félix', 'Éco-Héros', 1000, 0),
 (6, 'Nabil', 'nab@gmail.com', '842ba8199bc58660cf8f8d5b93c232d9d8911b4a', 'Nab', 'Gardien de la Terre', 500, 0),
 (8, 'Théo', 'theo@gmail.com', 'cf91a9cfe0882326bc9e5276dcdb1cce8cbef4ce', 'Tété', 'Éco-Héros', 1200, 0),
@@ -303,7 +305,7 @@ ALTER TABLE `defis`
 -- AUTO_INCREMENT pour la table `defis_quotidiens`
 --
 ALTER TABLE `defis_quotidiens`
-  MODIFY `Id_defis_quotidiens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `Id_defis_quotidiens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `item`
@@ -321,7 +323,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT pour la table `realisation`
 --
 ALTER TABLE `realisation`
-  MODIFY `Id_realisation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `Id_realisation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `user`
