@@ -2,11 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Communauté</title>
-    <link rel="stylesheet" href="css/reseau.css">
+    <link rel="stylesheet" href="./css/general.css">
+    <link rel="stylesheet" href="./css/reseau.css">   
+    <script src="https://kit.fontawesome.com/96e027db6d.js" crossorigin="anonymous"></script> 
+    <title>EcoQuest | Communauté</title>
 </head>
 <body>
+
+    <div id="burger-menu">
+        <span></span>
+    </div>
+
+
+    <div id="menu">
+
+        <div class="info">
+            <h2>Où veux-tu te rendre ?</h2>
+        </div>
+
+        <div class="image-container">
+            <img src="./images/carte-fefe4.png" alt="" class="background-image">
+        </div>
+    
+        <div class="point defis_point" data-text="Défis">
+            <a href="defis.php"><i class="fa-solid fa-location-dot"></i></a>
+        </div>
+    
+        <div class="point profil_point" data-text="Profil">
+            <a href="profil.php"><i class="fa-solid fa-location-dot"></i></a>
+        </div>
+    
+        <div class="point reseau_point" data-text="Réseau">
+            <a href="post.php"><i class="fa-solid fa-location-dot"></i></a>
+        </div>
+    
+        <div class="point dashboard_point" data-text="Dashboard">
+            <a href="dash.php"><i class="fa-solid fa-location-dot"></i></a>
+        </div>
+    
+        <div class="point shop_point" data-text="Boutique">
+            <a href="shop.html"><i class="fa-solid fa-location-dot"></i></a>
+        </div>
+    </div>
+
     <section id="blog">
 
         <div class="blog-heading">
@@ -120,6 +160,23 @@
           <button type="submit">Publier</button>
         </form>
     </section>
+
+    <script>
+        var burgerMenu = document.getElementById('burger-menu');
+
+        var overlay = document.getElementById('menu');
+
+        burgerMenu.addEventListener('click', function() {
+            this.classList.toggle("close");
+            overlay.classList.toggle("overlay");
+            if (test.style.display === "none") {
+                test.style.display = "block";
+            }
+            else {
+                test.style.display = "none";
+            }
+        });
+    </script>
 
   <script src="/js/reseau.js"></script>
 

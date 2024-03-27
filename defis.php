@@ -41,7 +41,7 @@ $id_num = $_SESSION['id_number'];
         </div>
     
         <div class="point reseau_point" data-text="Réseau">
-            <a href="post.php"><i class="fa-solid fa-location-dot"></i></a>
+            <a href="reseau.php"><i class="fa-solid fa-location-dot"></i></a>
         </div>
     
         <div class="point dashboard_point" data-text="Dashboard">

@@ -81,7 +81,7 @@ if ($tmpFile !== false) {
     </div>
 
     <div class="point reseau_point" data-text="Réseau">
-        <a href="test.html"><i class="fa-solid fa-location-dot"></i></a>
+        <a href="reseau.php"><i class="fa-solid fa-location-dot"></i></a>
     </div>
 
     <div class="point dashboard_point" data-text="Dashboard">

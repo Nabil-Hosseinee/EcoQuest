@@ -2,10 +2,222 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
-
-    
 }
+    
+    body {
+        min-height: 100vh;
+        font-family: "Jua", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    /* hamburger */
+    
+    #burger-menu {
+        position: absolute;
+        top: 5vh;
+        left: 95vw;
+        cursor: pointer;
+        height: 27px;
+        width: 27px;
+        overflow: visible;
+        z-index: 2;
+        display: block;
+      }
+      #burger-menu span,
+      #burger-menu span:before,
+      #burger-menu span:after {
+        background: black;
+        display: block;
+        height: 3px;
+        opacity: 1;
+        position: absolute;
+        transition: 0.3s ease-in-out;
+      }
+      #burger-menu span:before,
+      #burger-menu span:after {
+        content: "";
+      }
+      #burger-menu span:before {
+        left: 0px;
+        top: -10px;
+        width: 35px;
+      }
+      #burger-menu span {
+        right: 0px;
+        top: 13px;
+        width: 35px;
+      }
+      #burger-menu span:after {
+        left: 0px;
+        top: 10px;
+        width: 35px;
+      }
+      #burger-menu.close span:before {
+        top: 0px;
+        transform: rotate(90deg);
+        width: 35px;
+      }
+      #burger-menu.close span {
+        transform: rotate(-45deg);
+        top: 13px;
+        width: 35px;
+      }
+      #burger-menu.close span:after {
+        top: 0px;
+        left: 0;
+        transform: rotate(90deg);
+        opacity: 0;
+        width: 0;
+    }
+    
+    /* menu */
+    .info {
+        width: 50vw;
+        height: 12vh;
+        background-color: rgb(255, 107, 132, 0.5);
+        position: absolute;
+        top: 5vh;
+        left: 28vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border: 2px solid white;
+        border-radius: 16px;
+        text-shadow: 4px 4px 2px rgba(0,0,0,0.6);
+      }
+      
+      .info h2 {
+        font-size: 40px;
+      }
+        
+      /* menu */
+        #menu {
+          z-index: 1;
+          min-width: 100vw;
+          min-height: 100vh;
+          position: fixed;
+          top: 0;
+          height: 0;
+          visibility: hidden;
+          opacity: 0;
+          text-align: center;
+          transition: all 0.3s ease-in-out;
+        }
+        #menu.overlay {
+          visibility: visible;
+          opacity: 1;
+          background: rgba(0, 0, 0, 0.5);
+        }
+      
+      
+      /* Map dans hamburger */
+      .image-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain ;
+        z-index: -1;
+    }
+      
+      .point a {
+        text-decoration: none;
+      }
+      
+      .point a i {
+        font-size: 7vh;
+        color: rgb(255, 107, 132);
+        cursor: pointer;
+      }
+      
+      .point:hover {
+        animation-play-state: paused;
+      }
+      
+      .profil_point {
+        position: absolute;
+        top: 45vh;
+        left: 49vw;
+        animation: float 2s infinite;
+    }
+    
+    .shop_point {
+        position: absolute;
+        top: 68.5vh;
+        left: 50.5vw;
+        animation: float 2s infinite;
+        animation-delay: 0.5s;
+    }
+    
+    .defis_point {
+        position: absolute;
+        top: 20vh;
+        left: 41.5vw;
+        animation: float 2s infinite;
+        animation-delay: 1s;
+    }
+    
+    .reseau_point {
+        position: absolute;
+        top: 59.5vh;
+        left: 40.5vw;
+        animation: float 2s infinite;
+        animation-delay: 1.5s;
+    }
+    
+    .dashboard_point {
+        position: absolute;
+        top: 31vh;
+        left: 61.5vw;
+        animation: float 2s infinite;
+        animation-delay: 2s;
+    }
+      
+      @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+      }
+      
+      /* text-container */
+      @keyframes slideIn {
+        0% { opacity: 0; transform: translateX(-20px); }
+        100% { opacity: 1; transform: translateX(0); }
+      }
+      
+      .point:hover::before {
+        content: attr(data-text);
+        position: absolute;
+        top: -5vh; /* Ajustez la position verticale du texte */
+        left: -2.5vw;
+        transform: translateX(-50%);
+        background-color: rgb(255, 107, 132, 0.9); /* Couleur de fond du texte */
+        color: white; /* Couleur du texte */
+        font-weight: bold;
+        padding: 10px 50px; /* Espace intérieur du texte */
+        border-radius: 5px; /* Arrondi des coins */
+        animation: slideIn 0.5s forwards; /* Applique l'animation d'apparition */
+        font-size: 16px;
+      }
+      
+      .text-container {
+        position: relative;
+        width: 200px; /* Ajustez la largeur du conteneur selon vos besoins */
+        height: 200px; /* Ajustez la hauteur du conteneur selon vos besoins */
+      }
+
 
 a{
     text-decoration: none;
