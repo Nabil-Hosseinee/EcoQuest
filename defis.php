@@ -25,11 +25,11 @@ $id_num = $_SESSION['id_number'];
     <div id="menu">
 
         <div class="info">
-            <h2>Où voulez vous vous rendre ?</h2>
+            <h2>Où veux-tu te rendre ?</h2>
         </div>
 
         <div class="image-container">
-            <img src="./images/carte.jpg" alt="" class="responsive-image">
+            <img src="./images/carte-fefe4.png" alt="" class="background-image">
         </div>
     
         <div class="point defis_point" data-text="Défis">
