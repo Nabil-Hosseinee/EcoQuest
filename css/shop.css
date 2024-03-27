@@ -140,7 +140,7 @@ button {
   border: 2px solid black;
   transition: 0.3s ease;
   cursor: pointer;
-  z-index: 9999;
+  /* z-index: 9999; */
 }
 
 button:hover {
@@ -313,7 +313,7 @@ font-size: 16px;
   position: fixed;
   top: 3vh;
   left: 5vw;
-  z-index: 99999;
+  z-index: 1;
   display: flex;
   /* flex-direc tion: column; */
   justify-content: center;
