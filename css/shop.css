@@ -282,6 +282,7 @@ height: 200px; /* Ajustez la hauteur du conteneur selon vos besoins */
   padding: 50px;
   max-width: 100vw;
   min-height: 100vh;
+  background-color: #B5FF6D;
 }
 
 .banniere, .avatar {
@@ -290,10 +291,16 @@ height: 200px; /* Ajustez la hauteur du conteneur selon vos besoins */
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+}
+
+.banniere {
+  background-color: #FFB6C1;
 }
 
 .avatar {
   margin-top: 200px;
+  background-color: #BDE3FF;
 }
 
 .banniere h3, .avatar h3 {

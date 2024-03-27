@@ -15,8 +15,9 @@ if (isset($_POST['itemId'])) {
         $result_insert_acquisition->bindParam(':user_id', $user_id);
         $result_insert_acquisition->bindParam(':item_id', $id_item);
         $result_insert_acquisition->bindParam(':date_achat', $date);
+        $result_insert_acquisition->execute();
 
-        echo "Update fait";
+        header("Location: shop.php");
     }
     else {
         echo "Sessions utilisatuer non trouvée. Veuillez vous connecter.";

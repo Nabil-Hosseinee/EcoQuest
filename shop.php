@@ -2,6 +2,7 @@
 session_start();
 include('connect_bdd.php');
 $id_num = $_SESSION['id_number'];
+$identidiant = $_SESSION['identifiant'];
  
 ?>
 
@@ -26,8 +27,17 @@ $id_num = $_SESSION['id_number'];
     <div id="menu">
 
         <div class="info">
-            <h2>Où veux-tu te rendre ?</h2>
+            <h2>Où veux-tu te rendre, <?php echo $identidiant; ?> ?</h2>
         </div>
+
+        <a href="deconnexion.php">
+            <button>
+                <p>Déconnexion</p>
+                <div class="deco_icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </button>
+        </a>
 
         <div class="image-container">
             <img src="./images/carte.jpg" alt="" class="responsive-image">
@@ -71,12 +81,12 @@ $id_num = $_SESSION['id_number'];
     $result_bannerSelect->execute();
     $banniere = $result_bannerSelect->fetchAll(PDO::FETCH_ASSOC);
 
-    $avatarSelect = "SELECT * FROM item WHERE `Type` = 'Avatar'";
+    $avatarSelect = "SELECT * FROM item WHERE `Type` = 'Avatar' AND `Intitule item` != 'Avatar 1'";
     $result_avatarSelect = $db->prepare($avatarSelect);
     $result_avatarSelect->execute();
     $avatar = $result_avatarSelect->fetchAll(PDO::FETCH_ASSOC);
 
-    
+
 
     ?>
 
@@ -93,17 +103,31 @@ $id_num = $_SESSION['id_number'];
                         $prix = $bannieres['Prix'];
                         $id_banner = $bannieres['Id_item'];
 
+                        $sql_statut = "SELECT * FROM `acquisition` WHERE `user_Id`=$id_num AND `item_Id`=$id_banner AND `Obtenu`=1";
+                        $result_select_statut = $db->prepare($sql_statut);
+                        $result_select_statut->execute();
+                        $banner_statut = $result_select_statut->fetchAll(PDO::FETCH_ASSOC);
+
                         echo "
                             <div class='banniere-box'>
                                 <h4>$intitule</h4>
-                                <img src='$lien' alt=''>
-                                <form action='achat_realise.php' method='post' id='$id_banner'>
-                                    <p>Prix : $prix</p>
-                                    <input type='hidden' name='itemId' value='$id_banner' form='$id_banner'>
-                                    <button type='submit' name='achat_item'>Acheter cet item</button>
-                                </form>
-                            </div>
-                        ";
+                                <img src='$lien' alt=''>";
+                            if (count($banner_statut)!=0) {
+                                echo "
+                                    <h5>Item Obtenu</h5>
+                                ";
+                            }
+                            else {
+                                echo "
+                                    <form action='achat_realise.php' method='post' id='$id_banner'>
+                                        <p>Prix : $prix</p>
+                                        <input type='hidden' name='itemId' value='$id_banner' form='$id_banner'>
+                                        <button type='submit' name='achat_item'>Acheter cet item</button>
+                                    </form>
+                                ";
+                            }
+                        
+                        echo "</div>";
                     }
                 ?>
             </div>
@@ -120,17 +144,31 @@ $id_num = $_SESSION['id_number'];
                         $prix = $avatars['Prix'];
                         $id_avatar = $avatars['Id_item'];
 
+                        $sql_statut_avatar = "SELECT * FROM `acquisition` WHERE `user_Id`=$id_num AND `item_Id`=$id_avatar AND `Obtenu`=1";
+                        $result_select_statut_avatar = $db->prepare($sql_statut_avatar);
+                        $result_select_statut_avatar->execute();
+                        $avatar_statut = $result_select_statut_avatar->fetchAll(PDO::FETCH_ASSOC);
+
                         echo "
                             <div class='banniere-box'>
                                 <h4>$intitule</h4>
                                 <img src='$lien' alt=''>
-                                <form action='achat_realise.php' method='post' id='$id_avatar'>
-                                    <p>Prix : $prix</p>
-                                    <input type='hidden' name='itemId' value='$id_avatar' form='$id_avatar'>
-                                    <button type='submit' name='achat_item'>Acheter cet item</button>
-                                </form>
-                            </div>
-                        ";
+                            ";
+                            if (count($avatar_statut) != 0) {
+                                echo "
+                                    <h5>Item Obtenu</h5>
+                                ";
+                            }
+                            else {
+                                echo "
+                                    <form action='achat_realise.php' method='post' id='$id_avatar'>
+                                        <p>Prix : $prix</p>
+                                        <input type='hidden' name='itemId' value='$id_avatar' form='$id_avatar'>
+                                        <button type='submit' name='achat_item'>Acheter cet item</button>
+                                    </form>
+                                ";
+                            }
+                            echo "</div>";
                     }
                 ?>
             </div>
