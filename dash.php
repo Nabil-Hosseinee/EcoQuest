@@ -26,6 +26,15 @@ include('grade.php');
             <h2>Où veux-tu te rendre ?</h2>
         </div>
 
+        <a href="deconnexion.php">
+            <button class="deco">
+                <p>Déconnexion</p>
+                <div class="deco_icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+            </button>
+        </a>
+
         <div class="image-container">
             <img src="./images/carte-fefe4.png" alt="" class="background-image">
         </div>
@@ -61,7 +70,7 @@ include('grade.php');
 
         <div class="info-container">
             <div class="avatar">
-                <img src="./images/avatar3.jpg" alt="">
+                <img src="./images/items/pp1.png" alt="">
             </div>
             <div class="info-test">
                 <?php
@@ -98,6 +107,13 @@ include('grade.php');
 
             $user_id = $_SESSION['id_number']; 
 
+            // Nombre totale de défis
+            $sql_count_defis = "SELECT COUNT(*) AS total_defis FROM defis";
+            $result_count_defis = $db->prepare($sql_count_defis);
+            $result_count_defis->execute();
+            $ligne = $result_count_defis->fetch(PDO::FETCH_ASSOC);
+            $total_defis = $ligne['total_defis'];
+
             // Défis réalisés
             $sql_count_realisations = "SELECT COUNT(*) AS total_realisations FROM realisation WHERE user_Id = :user_id";
             $stmt = $db->prepare($sql_count_realisations);
@@ -122,7 +138,7 @@ include('grade.php');
 
             // Défis réalisés
             echo '<div class="box">';
-            echo '<h4>' . $total_realisations . '</h4>';
+            echo '<h4>' . $total_realisations . ' / ' . $total_defis . '</h4>';
             echo '<p>Défis réalisés</p>';
             echo '</div>';
 

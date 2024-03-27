@@ -13,7 +13,6 @@ $resultBanner = $db->prepare($demandeBanner);
 $resultBanner->execute();
 $defBanner = $resultBanner->fetchAll(PDO::FETCH_ASSOC);
 
-
 $demandeAvatar = "SELECT * FROM `item` WHERE `Type` = 'Avatar'";
 $resultAvatar = $db->prepare($demandeAvatar);
 $resultAvatar->execute();
@@ -150,7 +149,7 @@ foreach ($defMonnaie as $defMonnaies) {
                 foreach ($defis_quotidiens as $defi_quotidien) {
                     $id_defis_quotidiens = $defi_quotidien['Id_defis'];
                     $difficulte_defi = $defi_quotidien['Difficulte'];
-                    
+                    $icone=$defi_quotidien['Icone'];
                     $intitule=$defi_quotidien['Intitule defis'];
 
                     $sql_statut="SELECT * FROM realisation WHERE user_id=$id_num AND defis_id=$id_defis_quotidiens";
@@ -166,7 +165,7 @@ foreach ($defMonnaie as $defMonnaies) {
                         <div class='box' id='box'>
                             <div class='icon'>
                                 <div class='box icon-container'>
-                                    <i class='fa-solid fa-bicycle'></i>
+                                    <img src='$icone'>
                                 </div>
                             </div>
 
