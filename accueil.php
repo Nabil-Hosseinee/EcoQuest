@@ -89,7 +89,7 @@ if ($tmpFile !== false) {
     </div>
 
     <div class="point shop_point" data-text="Boutique">
-        <a href="shop.html"><i class="fa-solid fa-location-dot"></i></a>
+        <a href="shop.php"><i class="fa-solid fa-location-dot"></i></a>
     </div>
 
     

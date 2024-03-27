@@ -587,20 +587,22 @@ table {
 th, td {
   padding: 10px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: black;
+  color: white;
   font-weight: bold;
 }
 
 td {
-  background-color: #fff;
+  background-color: #B5FF6D;
 }
 
 tr:nth-child(even) td {
-  background-color: #f9f9f9;
+  background-color: #153125;
+  color: white;
 }
 
 th:first-child, td:first-child {
