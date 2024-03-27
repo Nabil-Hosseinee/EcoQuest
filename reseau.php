@@ -150,18 +150,18 @@
 
     <section id="add-post">
         <h2>Ajouter un post</h2>
-        <form id="post-form">
-          
-            <div>
-                <label for="image">Poster une photo</label>
-                <input type="file" id="image" name="image" accept="image/*" required>
-              </div>
-          
-          <button type="submit">Publier</button>
+        <form action="add_post.php" method="post" enctype="multipart/form-data">
+            <label for="photo">Choisir une photo :</label>
+            <input type="file" name="photo" id="photo" accept="image/*" required>
+            <br>
+            <label for="commentaire">Commentaire :</label>
+            <textarea name="commentaire" id="commentaire" rows="4" required></textarea>
+            <br>
+            <button type="submit">Publier</button>
         </form>
     </section>
 
-    <script>
+        <script>
         var burgerMenu = document.getElementById('burger-menu');
 
         var overlay = document.getElementById('menu');
