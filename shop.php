@@ -36,7 +36,7 @@ foreach ($defMonnaie as $defMonnaies) {
     <div id="menu">
 
         <div class="info">
-            <h2>Où veux-tu te rendre, <?php echo $identidiant; ?> ?</h2>
+            <h2>Où veux-tu te rendre ?</h2>
         </div>
 
         <a href="deconnexion.php">

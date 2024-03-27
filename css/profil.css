@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6 {
 #burger-menu {
     position: absolute;
     top: 5vh;
-    left: 90vw;
+    left: 95vw;
     cursor: pointer;
     height: 27px;
     width: 27px;
@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5, h6 {
   #burger-menu span,
   #burger-menu span:before,
   #burger-menu span:after {
-    background: white;
+    background: black;
     display: block;
     height: 3px;
     opacity: 1;
@@ -74,10 +74,10 @@ h1, h2, h3, h4, h5, h6 {
 /* info */
 .info {
   width: 50vw;
-  height: 15vh;
+  height: 12vh;
   background-color: rgb(255, 107, 132, 0.5);
   position: absolute;
-  top: 10vh;
+  top: 5vh;
   left: 28vw;
   display: flex;
   justify-content: center;
@@ -265,14 +265,14 @@ button i {
 #test {
   position: absolute;
   top: 11.2vh;
-  left: 89.5vw;
+  left: 94.3vw;
   cursor: pointer;
   z-index: 2;
   display: block;
 }
 #test i {
   font-size: 40px;
-  color: white;
+  color: black;
 }
 
 /* choix */

@@ -25,7 +25,7 @@ body {
 #burger-menu {
   position: absolute;
   top: 5vh;
-  left: 90vw;
+  left: 95vw;
   cursor: pointer;
   height: 27px;
   width: 27px;
@@ -83,10 +83,10 @@ body {
 /* info */
 .info {
 width: 50vw;
-height: 15vh;
+height: 12vh;
 background-color: rgb(255, 107, 132, 0.5);
 position: absolute;
-top: 10vh;
+top: 5vh;
 left: 28vw;
 display: flex;
 justify-content: center;
@@ -120,6 +120,7 @@ text-decoration: none;
   border: 2px solid black;
   transition: 0.3s ease;
   cursor: pointer;
+  z-index: 1;
 }
 
 .deco:hover {

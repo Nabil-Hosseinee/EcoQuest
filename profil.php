@@ -49,7 +49,7 @@ foreach ($defMonnaie as $defMonnaies) {
     <div id="menu">
 
         <div class="info">
-            <h2>Où voulez vous vous rendre ?</h2>
+            <h2>Où veux-tu te rendre ?</h2>
         </div>
 
         <a href="deconnexion.php">
@@ -242,21 +242,21 @@ foreach ($defMonnaie as $defMonnaies) {
 
     <script>
 
-        // script pour afficher la carte 
         var burgerMenu = document.getElementById('burger-menu');
-
         var overlay = document.getElementById('menu');
-
+        var index = document.getElementById('monnaie');
         burgerMenu.addEventListener('click', function() {
             this.classList.toggle("close");
             overlay.classList.toggle("overlay");
-            if (test.style.display === "none") {
-                test.style.display = "block";
+
+            if (index.style.display === "none") {
+                index.style.display = "block";
             }
             else {
-                test.style.display = "none";
+                index.style.display = "none";
             }
         });
+
 
 
         // script pour afficher les bannières et avatars
