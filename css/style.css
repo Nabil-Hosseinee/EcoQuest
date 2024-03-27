@@ -26,10 +26,15 @@ p {
 }
 
 .bg-background {
-    min-height: 100vh;
-    max-width: 100vw;
-    background-color: #98CE94;
+    height: 100vh;
+    width: 100vw;
+    /* background-color: #98CE94; */
+    background-image: url(../images/items/ban5.png);
+    background-size: cover; /* ou background-size: contain; */
+    background-position: center; /* pour centrer l'image */
+    background-repeat: no-repeat; /* pour éviter la répétition de l'image */
 }
+
 
 
 
@@ -126,6 +131,10 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.other p {
+    color: black;
 }
 
 .other-container {

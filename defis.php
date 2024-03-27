@@ -149,48 +149,35 @@ $id_num = $_SESSION['id_number'];
 
         <div class="defis-container">
             <?php
-                include('connect_bdd.php');
+            include('connect_bdd.php');
 
-                $sql_select_defis = "SELECT * FROM defis";
-                $result_select_defis = $db->prepare($sql_select_defis);
-                $result_select_defis->execute();
-                $defis = $result_select_defis->fetchAll(PDO::FETCH_ASSOC);
+            $sql_select_defis = "SELECT * FROM defis";
+            $result_select_defis = $db->prepare($sql_select_defis);
+            $result_select_defis->execute();
+            $defis = $result_select_defis->fetchAll(PDO::FETCH_ASSOC);
 
-                foreach ($defis as $defi) {
-                    $difficulte_defi = $defi["Difficulte"];
+            foreach ($defis as $defi) {
+                $difficulte_defi = $defi["Difficulte"];
+                $intitule = $defi["Intitule defis"];
+                $icone = $defi["Icone"];
 
-                    $intitule = $defi["Intitule defis"];
-
-                    // echo '<div class="box all-box ' . $difficulte_defi . '">' .
-                    //     '<div class="icon all-icon">' .
-                    //     '<div class="box icon-container">';
-                    // echo '</div>' .
-                    //     '</div>' .
-                    //     '<div class="description">' .
-                    //     '<h3>Défi ' . ucfirst($difficulte_defi) . '</h3>' . 
-                    //     '<p>' . $defi["Intitule defis"] . '</p>' .
-                    //     '</div>' .
-                    //     '</div>';
-
-                    echo "
-                        <div class = 'all-box $difficulte_defi'>
-
-                            <div class = 'all-icon'>
-                                <div class = 'icon-container'>
-                                    <img class='icon' src='$icone' alt='Icone du défi'>
-                                </div>
+                echo "
+                    <div class='all-box $difficulte_defi'>
+                        <div class='all-icon'>
+                            <div class='icon-container'>
+                                <img class='icon' src='$icone' alt='Icone du défi'>
                             </div>
-
-                            <div class = 'all-description'>
-                                <h3>Défi $difficulte_defi</h3>
-                                <p>$intitule</p>
-                            </div>
-
                         </div>
-                    ";
-                }
+                        <div class='all-description'>
+                            <h3>Défi $difficulte_defi</h3>
+                            <p>$intitule</p>
+                        </div>
+                    </div>
+                ";
+            }
             ?>
         </div>
+
     </section>
 
 
