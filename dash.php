@@ -1,6 +1,25 @@
 <?php
 include('grade.php');
+include('connect_bdd.php');
+
+$user_id = isset($_SESSION['id_number']) ? $_SESSION['id_number'] : null;
+
+if ($user_id) {
+    $sql_difficulty_count = "SELECT Difficulte, COUNT(*) AS nombre_defis FROM realisation JOIN defis ON realisation.defis_Id = defis.Id_defis WHERE realisation.user_Id = :user_id GROUP BY Difficulte";
+    $stmt_difficulty_count = $db->prepare($sql_difficulty_count);
+    $stmt_difficulty_count->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    if ($stmt_difficulty_count->execute()) {
+        $difficulty_counts = $stmt_difficulty_count->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $difficulty_counts = [];
+    }
+} else {
+    $difficulty_counts = [];
+}
+
+$difficulty_counts_json = json_encode($difficulty_counts);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -163,16 +182,6 @@ include('grade.php');
 </section>
 
 
-
-
-    <section class="graphique">
-        <div class="chart" id="piechart" style="width: 900px; height: 500px;"></div>
-        <div class="chart" id="curve_chart" style="width: 900px; height: 500px"></div>
-        <div class="chart" id="barchart_values" style="width: 900px; height: 500px;"></div>
-    </section>
-
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
     <script>
         var burgerMenu = document.getElementById('burger-menu');
 
@@ -190,24 +199,40 @@ include('grade.php');
         });
     </script>
 
-    <script type="text/javascript">
-        // piechart
+
+<section class="graphique">
+        <div class="chart" id="piechart" style="width: 900px; height: 500px;"></div>
+        <div class="chart" id="curve_chart" style="width: 900px; height: 500px"></div>
+        <div class="chart" id="barchart_values" style="width: 900px; height: 500px;"></div>
+    </section>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
         google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-            ['Language', 'Speakers (in millions)'],
-            ['German',  5.85],
-            ['French',  1.66],
-            ['Italian', 0.316],
-            ['Romansh', 0.0791]
-            ]);
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawCharts() {
+            var difficultyCounts = <?php echo $difficulty_counts_json; ?>;
+            if (difficultyCounts.length > 0) {
+                drawPieChart(difficultyCounts);
+            }
+        }
+
+        function drawPieChart(difficultyCounts) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Difficulte');
+            data.addColumn('number', 'Nombre de défis réalisés');
+            difficultyCounts.forEach(function(item) {
+                data.addRow([item.Difficulte, parseInt(item.nombre_defis)]);
+            });
 
             var options = {
-                legend: 'none',
+                title: 'Proportion des défis réalisés selon chaque difficulté',
                 pieSliceText: 'label',
-                title: 'Swiss Language Use (100 degree rotation)',
                 pieStartAngle: 100,
+                colors: ['#ffb6c1', '#fff0b0'],
+                slices: {0: {textStyle: {color: 'black'}}, 1: {textStyle: {color: 'black'}}}
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -221,17 +246,18 @@ include('grade.php');
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-            ['Year', 'Sales', 'Expenses'],
-            ['2004',  1000,      400],
-            ['2005',  1170,      460],
-            ['2006',  660,       1120],
-            ['2007',  1030,      540]
+                ['Semaine', 'Empreinte carbone'],
+                ['Semaine 1',  1120],
+                ['Semaine 2',  1080],
+                ['Semaine 3',  960],
+                ['Semaine 4',  925]
             ]);
 
             var options = {
-            title: 'Company Performance',
-            curveType: 'function',
-            legend: { position: 'bottom' }
+                title: 'Calcul de l\'empreinte carbone par semaine',
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                colors: ['#B5FF6D']
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
@@ -241,35 +267,29 @@ include('grade.php');
     </script>
 
     <script>
-         google.charts.load("current", {packages:["corechart"]});
+        google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ["Element", "Density", { role: "style" } ],
-                ["Copper", 8.94, "#b87333"],
-                ["Silver", 10.49, "silver"],
-                ["Gold", 19.30, "gold"],
-                ["Platinum", 21.45, "color: #e5e4e2"]
+            ["Semaine", "Avancée des défis", { role: "style" }],
+            ["Semaine 1", 8, "#153125"],
+            ["Semaine 2", 12, "#384955"],
+            ["Semaine 3", 17, "#86ACC6"],
+            ["Semaine 4", 21, "#BDE3FF"]
             ]);
 
-            var view = new google.visualization.DataView(data);
-            view.setColumns([0, 1,
-                            { calc: "stringify",
-                                sourceColumn: 1,
-                                type: "string",
-                                role: "annotation" },
-                            2]);
-
             var options = {
-                title: "Density of Precious Metals, in g/cm^3",
+                title: "Avancée des défis par semaine",
                 width: 600,
                 height: 400,
                 bar: {groupWidth: "95%"},
                 legend: { position: "none" },
+                colors: ['#153125', '#384955', '#86ACC6', '#BDE3FF']
             };
             var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-            chart.draw(view, options);
+            chart.draw(data, options);
         }
     </script>
+
 </body>
 </html>

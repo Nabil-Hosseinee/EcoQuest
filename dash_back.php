@@ -1,3 +1,0 @@
-<?php
-// Gérer les graphiques
-?>
